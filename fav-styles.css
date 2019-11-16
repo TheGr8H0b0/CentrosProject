@@ -1,4 +1,50 @@
 .fav-header {
     text-align: center;
-    margin-top:70px;
+    margin-top: 70px;
+    font-size: 4rem;
 }
+
+.sub-header {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.search-wrapper {
+    margin-top: 20px;
+    text-align:center;
+}
+.search-wrapper > input {
+    text-align:left;
+}
+
+.pop-items {
+    margin: 10px 4%;
+    font-size: 1.8rem;
+}
+
+.userInfo {
+    text-align: center;
+    margin: 1rem;
+    font-size: 1.2rem;
+}
+
+.login-form {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.form-input {
+    margin-top: 1.2rem;
+}
+
+
+.center-button {
+    text-align: center;
+    margin: 1.2rem;
+}
+
+.upgrade {
+    text-align: center;
+    margin-top: 1rem;
+}
+

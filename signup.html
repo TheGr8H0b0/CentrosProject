@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Favorites</title>
+  <title>Sign up</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="fav-styles.css">
@@ -40,8 +40,28 @@
       </div>  
     </nav>
     
-    <h1 class="sub-header">My Favorited Items:</h1>
-
+    <h1 class="sub-header">Create Account</h1>
+    
+    <div class="login-form">
+      <form id="signupForm" method="post" action="thePHP.php"> <!-- TODO: Make PHP page -->
+        <label>Email</label><br>
+        <input type="email" placeholder="Your email here">
+        <br/>
+        <label class="form-input">Password</label><br>
+        <input type="password" name="pass" id="password" placeholder="Your password here">
+        <br>
+        <label class="form-input">Confirm Password</label><br>
+        <input type="password" name="pass" id="c-password" placeholder="Confirm your password">
+        <br>
+        <button class="form-input" type="submit" name="login-btn">Create Account</button>
+      </form>
+    </div>
+    
+    <h2 class="sub-header">Have an account? Log in here</h2>
+    
+    <div class="center-button">
+      <a href="login.html"><button type="button">Go to login</button></a>
+    </div>
 
 </body>
 </html>
