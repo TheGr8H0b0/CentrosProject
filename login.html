@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="fav-styles.css">
+    <script src="https://kit.fontawesome.com/95c67e681e.js" crossorigin="anonymous"></script>
+      
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md bg-primary navbar-light">
+      <a class="navbar-brand" href="index.html">Centros</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="search.html"><i class="fas fa-search"></i> Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="login.html"><i class="fas fa-user"></i> Log in</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="upgrade.html"><i class="fas fa-dollar-sign"></i> Upgrade</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="favorites.html"><i class="far fa-star"></i> Favorites</a>
+          </li> 
+        </ul>
+      </div>  
+    </nav>
+    
+    <h1 class="sub-header">Have an account? Log in here</h1>
+    
+    <div class="login-form">
+      <form id="loginForm" method="post" action="thePHP.php"> <!-- TODO: Make PHP page -->
+        <label>Email</label><br>
+        <input type="email" placeholder="Your email here">
+        <br/>
+        <label class="form-input">Password</label><br>
+        <input type="password" placeholder="Your password here">
+        <br>
+        <button class="form-input" type="submit" name="login-btn">Login</button>
+      </form>
+    </div>
+    
+    <h2 class="sub-header">Don't have an account? Create one</h2>
+    
+    <div class="center-button">
+      <a href="signup.html"><button type="button">Create Account</button></a>
+    </div>
+
+</body>
+</html>
+
+
