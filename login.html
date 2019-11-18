@@ -5,12 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="fav-styles.css">
-    <script src="https://kit.fontawesome.com/95c67e681e.js" crossorigin="anonymous"></script>
-      
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">  
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="login.css">
+  <script src="https://kit.fontawesome.com/95c67e681e.js" crossorigin="anonymous"></script>
+    
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -44,12 +45,15 @@
     
     <div class="login-form">
       <form id="loginForm" method="post" action="thePHP.php"> <!-- TODO: Make PHP page -->
-        <label>Email</label><br>
-        <input type="email" placeholder="Your email here">
-        <br/>
-        <label class="form-input">Password</label><br>
-        <input type="password" placeholder="Your password here">
+        <label>Email</label>
+        <div class="email-input">
+            <input type="email">
+        </div>
         <br>
+        <label>Password</label>
+        <div class="password-input">
+            <input type="password">
+        </div>
         <button class="form-input" type="submit" name="login-btn">Login</button>
       </form>
     </div>
