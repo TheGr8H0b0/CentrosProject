@@ -9,8 +9,6 @@ $(document).ready(function() {
         }
     });
 
-    $("#response").load("search.php");
-
     $("input").focus(function(){
         $(".input span").css("opacity", "1");
         $(".input span").css("transform", "scale(1)");
