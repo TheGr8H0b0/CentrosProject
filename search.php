@@ -9,7 +9,8 @@ $data = [
 	'location' => 'United States',
 	'search_engine' => 'google.com',
 	'gl' => 'US',
-    'hl' => 'en'
+	'hl' => 'en',
+	'tbm' => 'shop'
 ];
 
 curl_setopt($ch, CURLOPT_URL, "https://app.zenserp.com/api/v2/search?" . http_build_query($data));
@@ -20,12 +21,13 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 ));
 
 $response = curl_exec($ch);
+
+echo($response);
+
 curl_close($ch);
 
 $json = json_decode($response);
 
 var_dump($json);
-
-echo($json);
 
 ?>
