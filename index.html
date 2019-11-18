@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-site-verification" content="xof0DhIR5emRUMfLKrgOIlVdH1K9112XsiL3pJT3A7E" />
     <title>Centros</title>
     <link rel="stylesheet" href="fav-styles.css">
     <script src="https://kit.fontawesome.com/95c67e681e.js" crossorigin="anonymous"></script>
@@ -13,9 +12,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   </head>
+    
   <body>
       <nav class="navbar navbar-expand-md bg-primary navbar-light">
-      <a class="navbar-brand" href="index.html">Centros</a>
+          <div id="navigationBar">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -38,6 +38,7 @@
           </li> 
         </ul>
       </div>  
+          </div>
     </nav>
       
     <h1 class="fav-header">Centros</h1>
@@ -53,44 +54,6 @@
     </p>
 
     <script src="https://apis.google.com/js/api.js"></script>
-<script>
-  /**
-   * Sample JavaScript code for content.products.list
-   * See instructions for running APIs Explorer code samples locally:
-   * https://developers.google.com/explorer-help/guides/code_samples#javascript
-   */
-
-    function authenticate() {
-      return gapi.auth2.getAuthInstance()
-          .signIn({scope: "https://www.googleapis.com/auth/content"})
-          .then(function() { console.log("Sign-in successful"); },
-                function(err) { console.error("Error signing in", err); });
-    }
-    function loadClient() {
-      gapi.client.setApiKey("AIzaSyB1YA9Q5tKfWyzDH_jt2hm5o0Hv9LxAdps");
-      return gapi.client.load("https://content.googleapis.com/discovery/v1/apis/content/v2/rest")
-          .then(function() { console.log("GAPI client loaded for API"); },
-                function(err) { console.error("Error loading GAPI client for API", err); });
-    }
-    // Make sure the client is loaded and sign-in is complete before calling this method.
-    function execute() {
-      return gapi.client.content.products.list({
-        "merchantId": 12984612458213,
-        "includeInvalidInsertedItems": false,
-        "maxResults": 5
-      })
-          .then(function(response) {
-                  // Handle the results here (response.result has the parsed body).
-                  console.log("Response", response);
-                },
-                function(err) { console.error("Execute error", err); });
-    }
-    gapi.load("client:auth2", function() {
-      gapi.auth2.init({client_id: "117135516712253192219"});
-    });
-  </script>
-  <button onclick="authenticate().then(loadClient)">authorize and load</button>
-  <button onclick="execute()">execute</button>
   </body>
 </html>
 
