@@ -3,7 +3,7 @@ html{
     height: 100%;
 }
 
-label,h1,h2,h6,li{
+label,h1,h2,h6,li,div{
     color: #FFF;
 }
 body {
@@ -12,6 +12,7 @@ body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26);
   }
+
 /*gradient animation */
 @keyframes gradient { 
     0%{background-position:0 0}
