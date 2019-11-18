@@ -1,0 +1,89 @@
+/* ====================================================
+Recreating the email field from https://webflow.com/cms. Just an experiment - not as cross-browser friendly as the original.
+Changed:
+- animated gradient bar to :after element
+- flexbox for layout
+==================================================== */
+
+html{
+    /*Gradient takes up the full lenngth of the screen*/
+    height: 100%;
+}
+
+label,h1,h2{
+    color: #FFF;
+}
+
+a { text-decoration: none; }
+input { border-style: none; background: transparent; outline: none; }
+button { padding: 0; background: none; border: none; outline: none; }
+
+/*some basic page styles*/
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  /*justify-content: center;*/
+  height: 100vh;
+  max-width: 1600px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+/*gradient animation */
+@keyframes gradient { 
+  0%{background-position:0 0}
+  100%{background-position:100% 0}
+}
+
+.email-input,.password-input {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border-radius: 2px;
+    padding: 1.4rem 2rem 1.6rem;
+    background: rgba(57, 63, 84, 0.8);
+
+    content: "";
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 999;
+    height: 2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    background-position: 0% 0%;
+    background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
+    background-size: 500% auto;
+    animation: gradient 3s linear infinite;
+}
+
+input{
+    height: 43px;
+    margin-top: -20px !important;
+    width:inherit;
+    background: transparent;
+    text-align: center;
+    color: #000;
+}
+
+.form-input{
+    color: #FFF;
+    border: #FFF;
+    border: dotted;
+    padding: 5px;
+}
+.center-button a{
+    color: #FFF !important;
+    background: #007bff;
+    padding: 5px;
+}
