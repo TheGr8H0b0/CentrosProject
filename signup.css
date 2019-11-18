@@ -65,6 +65,8 @@ body {
     background: linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6);
     background-size: 500% auto;
     animation: gradient 3s linear infinite;
+    border-radius: 9999em;
+
 }
 
 input{
