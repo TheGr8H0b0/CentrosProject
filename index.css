@@ -1,4 +1,23 @@
 
+html{
+    /*Gradient takes up the full lenngth of the screen*/
+    height: 100%;
+}
+
+label,h1,h2,p{
+    color: #FFF;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26);
+  }
+/*gradient animation */
+@keyframes gradient { 
+    0%{background-position:0 0}
+    100%{background-position:100% 0}
+}
 /*style of the actual input field*/
 .search-bar {
     position: relative;
@@ -9,6 +28,7 @@
     outline: none;
     padding: 0 .325em;
     z-index: 1; /*needs to be above the :focus span*/
+    width:100%;
 }
 .input {
     
@@ -32,4 +52,7 @@
     /*center the search box*/
     display: table;
     margin: 0 auto;
+    width:80%;
+
+    
 }

@@ -9,6 +9,7 @@
     outline: none;
     padding: 0 .325em;
     z-index: 1; /*needs to be above the :focus span*/
+    width:100%;
 }
 .input {
     
@@ -32,4 +33,5 @@
     /*center the search box*/
     display: table;
     margin: 0 auto;
+    width:80%;
 }
