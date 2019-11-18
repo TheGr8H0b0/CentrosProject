@@ -1,9 +1,10 @@
+
 html{
     /*Gradient takes up the full lenngth of the screen*/
     height: 100%;
 }
 
-label,h1,h2,h6,li{
+label,h1,h2,p{
     color: #FFF;
 }
 body {
@@ -17,7 +18,6 @@ body {
     0%{background-position:0 0}
     100%{background-position:100% 0}
 }
-
 /*style of the actual input field*/
 .search-bar {
     position: relative;
@@ -53,4 +53,6 @@ body {
     display: table;
     margin: 0 auto;
     width:80%;
+
+    
 }
