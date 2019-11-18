@@ -1,0 +1,24 @@
+html{
+    /*Gradient takes up the full lenngth of the screen*/
+    height: 100%;
+}
+
+label,h1,h2,h6,li{
+    color: #FFF;
+}
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26);
+  }
+/*gradient animation */
+@keyframes gradient { 
+    0%{background-position:0 0}
+    100%{background-position:100% 0}
+}
+
+#navigationBar {
+    margin-left: auto;
+    margin-right: auto;
+}
