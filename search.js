@@ -11,11 +11,10 @@ $(document).ready(function() {
             });
         }
     });
-
-    $("input").focus(function(){
-        $(".input span").css("opacity", "1");
-        $(".input span").css("transform", "scale(1)");
-    });
+    console.log("Test");
+    jsonObj = getData();
+    console.log(jsonObj.shopping_results[0])
+});
     $("input").blur(function(){
         $(".input span").css("color", "#aaa");
         $(".input span").css("color", "#aaa");
