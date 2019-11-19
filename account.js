@@ -19,18 +19,16 @@ $(document).ready(function(){
     });
 
 
-    $("#login-btn").on("click", function(e){
+    $("#logout-btn").on("click", function(e){
         e.preventDefault();
         
         var url = "logout.php";
-        
-        // serialize packages the input values in the form
-        var data = $("form").serialize();
-        var jqxhr = $.post(url, data);
+
+        var jqxhr = $.post(url);
         
         // set up callbacks
         jqxhr.done(function(data){
-            $("#response").html(data);
+            window.location.replace("index.html");
         });
         
         jqxhr.fail(function(jqXHR){
