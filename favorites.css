@@ -1,0 +1,9 @@
+.row{
+    border-style: solid;
+    border-color: #003d7f;
+    padding-left: 15px;
+    margin: 10px;
+}
+.item-description,.price,.small-price,#descOverlay{
+    color: #adb5bd;
+}

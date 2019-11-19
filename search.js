@@ -1,6 +1,8 @@
 $(document).ready(function() {
-    console.log("Test");
     $(".search-bar").focus(); //so they can immediately start searching
+    $("input").css("transition", "transform .5s, opacity .25s;");
+    $("input").css("transform", "scale(1)");
+    
     $(".search-bar").on('keyup', function(event){
         //If the enter button is the button being pressed
         if(event.keyCode ==13){
@@ -25,9 +27,9 @@ $(document).ready(function() {
 });
 
 function createResultDisplay(item, index, arr) {
-    var htmlAppend = "<li>" + 
+    var htmlAppend =
     "<div class='item-container'>" +
-        "<a class=item-link href=" + "https://www.google.com/" + item.link + ">" +
+        "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
             "<div class='row'>" + 
                 "<div class='col-xs-3'>" +
                     "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
@@ -45,7 +47,7 @@ function createResultDisplay(item, index, arr) {
                 "</div>" + 
             "</div>" + 
         "</a>"
-    "</div></li>";
+    "</div>";
 
     $("#search-results").append(htmlAppend);
     console.log(htmlAppend);
