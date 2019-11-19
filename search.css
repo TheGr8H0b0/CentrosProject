@@ -58,3 +58,14 @@ body {
     border: 10px;
 
 }
+
+body{
+    text-align: -webkit-center;
+}
+
+.item-container{
+    border-style: solid;
+    border-color: #003d7f;
+    padding-left: 15px;
+    margin: 10px;
+}

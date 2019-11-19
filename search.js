@@ -25,9 +25,9 @@ $(document).ready(function() {
 });
 
 function createResultDisplay(item, index, arr) {
-    var htmlAppend = "<li>" + 
+    var htmlAppend =
     "<div class='item-container'>" +
-        "<a class=item-link href=" + "https://www.google.com/" + item.link + ">" +
+        "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
             "<div class='row'>" + 
                 "<div class='col-xs-3'>" +
                     "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
@@ -45,7 +45,7 @@ function createResultDisplay(item, index, arr) {
                 "</div>" + 
             "</div>" + 
         "</a>"
-    "</div></li>";
+    "</div>";
 
     $("#search-results").append(htmlAppend);
     console.log(htmlAppend);
