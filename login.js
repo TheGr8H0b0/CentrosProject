@@ -2,7 +2,7 @@ $(document).ready(function(){
 
     $("#login-btn").on("click", function(e){
         e.preventDefault();
-        alert("hey!");
+        
         var url = "login.php";
         
         // serialize packages the input values in the form
