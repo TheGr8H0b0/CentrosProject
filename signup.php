@@ -43,7 +43,7 @@
                 $signup->bind_param("ss", $email, $pass);
                 $signup->execute();
 
-                $statusMessage = "Account with email " . $email . " added successfully!";
+                $statusMessage = $email . " added successfully! Redirecting to login...";
 
                 $signup->close();
             }
