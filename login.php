@@ -35,7 +35,7 @@
                 $statusMessage = "Sorry, either your email or password is incorrect";
             }
             else{
-                $statusMessage = "Welcome " . $email . "!";
+                $statusMessage = "";
 
                 // SET COOKIE HERE
                 $expiryTime = time() + 60*60*24; // 1 day from now

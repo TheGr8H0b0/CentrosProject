@@ -25,11 +25,25 @@ $(document).ready(function() {
         
         // set up callbacks
         jqxhr.done(function(data){
-            if(String(data).includes("successfully")){
+            if(String(data).includes("successfully")) {
                 $("#response").css("color","lime");
+                $("#response").html(data);
+                var number = 7;
+                function countdown() {
+                    setTimeout(countdown, 1000);
+                    $("#num").html(number);
+                    number--;
+
+                    if(number < 0){
+                        window.location.replace("login.html");
+                        number=0;
+                    }
+                }
+                countdown();
             }
-            $("#response").html(data);
-            setTimeout(function(){ window.location.replace("login.html"); }, 4000);
+            else {
+                $("#response").html(data);
+            }
         });
         
         jqxhr.fail(function(jqXHR){
