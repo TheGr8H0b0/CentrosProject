@@ -1,1 +1,5 @@
-hello world
+<?php
+
+echo "php worked! 123231";
+
+?>
