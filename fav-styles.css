@@ -4,7 +4,7 @@ img {
     padding: 5px; /* Some padding */
     width: 150px; /* Set a small width */
 }
-  
+
 /* Add a hover effect (blue shadow) */
 img:hover {
     box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
@@ -15,6 +15,10 @@ img:hover {
     border: 1px solid white;
     margin: 25px 90px;
 }
+/* .favorites-item:hover{
+  margin-left: 100px;
+  display:block;
+} */
 
 .fav-link {
     text-decoration: none;
@@ -33,10 +37,26 @@ img:hover {
     text-align: left;
     font-size: 1.3rem;
 }
+.changed-price {
+    text-align: left;
+    font-size: 1.3rem;
+    opacity: 0.8;
+    margin-top: 10px;
+}
+.small-price {
+  text-align: left;
+  font-size: 1rem;
+  opacity: 0.8;
+}
+.more-item-description{
+  ont-size: 1rem;
+  margin-top: 1rem;
+}
 
 .item-description {
     font-size: 1rem;
     margin-top: 1rem;
+    text-align: left;
 }
 
 a {
@@ -46,6 +66,8 @@ a {
 a:hover {
     text-decoration: none;
 }
+
+
 
 
 .fav-header {
