@@ -11,7 +11,7 @@ $(document).ready(function(){
         
         // set up callbacks
         jqxhr.done(function(data){
-            $("#hope").html(data);
+            $("#response").html(data);
         });
         
         jqxhr.fail(function(jqXHR){

@@ -71,6 +71,11 @@ input{
     color: #000;
 }
 
+#response {
+    text-align: center;
+    color: red;
+}
+
 .form-input{
     color: #FFF;
     border: #FFF;
