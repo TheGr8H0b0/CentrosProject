@@ -36,6 +36,24 @@
             }
             else{
                 $statusMessage = "Welcome " . $email . "!";
+
+                // SET COOKIE HERE
+                $expiryTime = time() + 60*60*24; // 1 day from now
+                setcookie('user', $email, $expiryTime);
+
+
+
+                // BEGIN COOKIE MADNESS
+                
+                // Case 3: logout
+                // delete the cookie by setting expiration date to the past
+                setcookie('user', '', time() - 3600);
+                
+                else if( isset($_COOKIE['user']) ){
+                    $username = $_COOKIE['user'];
+                }
+                // END COOKIE MADNESS
+
             }
             
             $stmt->close();
