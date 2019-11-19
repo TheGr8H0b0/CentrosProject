@@ -9,8 +9,7 @@ $(document).ready(function() {
         var pass = $("#password");
         var confirm = $("#c-password");
 
-        console.log("VALUES: " + pass.value + " " + confirm.value);
-        if(pass.value !== confirm.value) {
+        if(pass.val() !== confirm.val()) {
             $("#response").html("Passwords must match");
             return;
         }
