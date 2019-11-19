@@ -1,5 +1,39 @@
 $(document).ready(function() {
     $("#password, #c-password").keyup(checkPasswordMatch);
+
+    $("#signup-btn").on("click", function(e){
+        e.preventDefault();
+        
+        var url = "signup.php";
+
+        var pass = $("#password");
+        var confirm = $("#c-password");
+
+        console.log("VALUES: " + pass.value + " " + confirm.value);
+        if(pass.value !== confirm.value) {
+            $("#response").html("Passwords must match");
+            return;
+        }
+        
+        // serialize packages the input values in the form
+        var data = $("form").serialize();
+        var jqxhr = $.post(url, data);
+        
+        // set up callbacks
+        jqxhr.done(function(data){
+            $("#response").html(data);
+        });
+        
+        jqxhr.fail(function(jqXHR){
+            console.log("Error: " + jqXHR.status);
+        });
+        
+        jqxhr.always(function(){
+            console.log("Done with AJAX request.");
+        });
+
+    });
+
 });
 
 function checkPasswordMatch() {

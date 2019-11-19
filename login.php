@@ -6,9 +6,6 @@
       // Check the fields are present
       if(isset($_POST["login-email"]) && isset($_POST["login-pass"])){
           
-        // Check that fields have valid values
-        //$amount = floatval($_POST["amount"]);
-        //$fromAcct = intval($_POST["from_acct"]);
         $email = $_POST["login-email"];
         $pass = $_POST["login-pass"];
 
