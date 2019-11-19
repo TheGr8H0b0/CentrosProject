@@ -29,6 +29,8 @@ body {
     padding: 0 .325em;
     z-index: 1; /*needs to be above the :focus span*/
     width:100%;
+    transition: transform .5s, opacity .25s;
+    transform: scale(.993,.94);
 }
 .input {
     
@@ -53,4 +55,6 @@ body {
     display: table;
     margin: 0 auto;
     width:80%;
+    border: 10px;
+
 }
