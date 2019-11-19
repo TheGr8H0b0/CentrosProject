@@ -11,6 +11,7 @@ $(document).ready(function() {
             searchQuery.val("");
 
             data = getData().shopping_results;
+            console.log(data[0]);
             data.forEach(createResultDisplay);
 
         }
@@ -50,7 +51,6 @@ function createResultDisplay(item, index, arr) {
     "</div>";
 
     $("#search-results").append(htmlAppend);
-    console.log(htmlAppend);
 }
 
 function getData() {
