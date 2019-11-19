@@ -36,6 +36,11 @@
             }
             else{
                 $statusMessage = "Welcome " . $email . "!";
+
+                // SET COOKIE HERE
+                $expiryTime = time() + 60*60*24; // 1 day from now
+                setcookie('user', $email, $expiryTime);
+
             }
             
             $stmt->close();

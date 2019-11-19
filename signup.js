@@ -14,13 +14,22 @@ $(document).ready(function() {
             return;
         }
         
+        if(pass.val().length < 8) {
+            $("#response").html("Password must be longer than 8 characters");
+            return;
+        }
+        
         // serialize packages the input values in the form
         var data = $("form").serialize();
         var jqxhr = $.post(url, data);
         
         // set up callbacks
         jqxhr.done(function(data){
+            if(String(data).includes("successfully")){
+                $("#response").css("color","lime");
+            }
             $("#response").html(data);
+            setTimeout(function(){ window.location.replace("login.html"); }, 4000);
         });
         
         jqxhr.fail(function(jqXHR){
