@@ -12,7 +12,9 @@ $(document).ready(function(){
         // set up callbacks
         jqxhr.done(function(data){
             $("#response").html(data);
-            window.location.replace("index.html");
+            if(!String(data).includes("Sorry")) {
+                window.location.replace("index.html");
+            }
         });
         
         jqxhr.fail(function(jqXHR){
