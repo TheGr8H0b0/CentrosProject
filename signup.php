@@ -44,10 +44,11 @@
                 $signup->execute();
 
                 $statusMessage = "Account with email " . $email . " added successfully!";
+
+                $signup->close();
             }
             
             $stmt->close();
-            $signup->close();
         }
         
         $conn->close();
