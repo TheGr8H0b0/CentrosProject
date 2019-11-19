@@ -13,13 +13,11 @@ $(document).ready(function() {
     });
 
     $("input").focus(function(){
-        console.log("Hi");
         $("input").css("transition", "transform .5s, opacity .25s;");
         $("input").css("transform", "scale(1)");
         
     });
     $("input").blur(function(){
-        console.log("Bye");
         $("input").css("transition", "transform .5s, opacity .25s");
         $("input").css("transform", "scale(.993,.94)");
     });
