@@ -4,13 +4,17 @@ $ch = curl_init();
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_HEADER, false);
 
+$query = $_GET['query'];
+$numResults = $_GET['numResults'];
+
 $data = [
-	'q' => 'iPhone',
+	'q' => $query,
 	'location' => 'United States',
 	'search_engine' => 'google.com',
 	'gl' => 'US',
 	'hl' => 'en',
-	'tbm' => 'shop'
+	'tbm' => 'shop',
+	'num' => $numResults
 ];
 
 curl_setopt($ch, CURLOPT_URL, "https://app.zenserp.com/api/v2/search?" . http_build_query($data));
