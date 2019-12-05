@@ -1,4 +1,9 @@
+var lastSearchData;
+
 $(document).ready(function() {
+    $("#search-results").addEventListener("click", loadSearchResults);
+    $("#recent-searches").addEventListener("click", recentSearches);
+    $("#filter-results").addEventListener("click", filterResults);
     $(".search-bar").focus(); //so they can immediately start searching
     $("input").css("transition", "transform .5s, opacity .25s;");
     $("input").css("transform", "scale(1)");
@@ -18,8 +23,8 @@ $(document).ready(function() {
                     jsonresult[0] += "}}]}";
                     jsonresult = JSON.parse(jsonresult[0]);
                     console.log(jsonresult);
-                    var data = jsonresult.shopping_results;
-                    data.forEach(createResultDisplay);
+                    lastSearchData = jsonresult.shopping_results;
+                    lastSearchData.forEach(createResultDisplay);
                 }
             });
 
@@ -35,6 +40,27 @@ $(document).ready(function() {
         $("input").css("transform", "scale(.993,.94)");
     });
 });
+
+function filterResults() {
+    $("#filter-results").innerHTML = "<div>You clicked me!<div>";
+    $("#search-results").innerHTML = "";
+    $("#recent-searches").innerHTML = "";
+    console.log("Test3");
+}
+
+function recentSearches() {
+    $("#recent-searches").innerHTML = "<div>You clicked me!<div>";
+    $("#filter-results").innerHTML = "";
+    $("#search-results").innerHTML = "";
+    console.log("Test2");
+}
+
+function loadSearchResults() {
+    $("#search-results").innerHTML = "<div>You clicked me!<div>";
+    $("#filter-results").innerHTML = "";
+    $("#recent-searches").innerHTML = "";
+    console.log("Test");
+}
 
 function createResultDisplay(item, index, arr) {
     if (item.title != null && item.price != null && item.link && item.thumbnail) {
