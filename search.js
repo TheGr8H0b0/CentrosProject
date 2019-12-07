@@ -1,12 +1,12 @@
 var lastSearchData;
 
 $(document).ready(function() {
-    $("#search-results").addEventListener("click", loadSearchResults);
-    $("#recent-searches").addEventListener("click", recentSearches);
-    $("#filter-results").addEventListener("click", filterResults);
+    $("#search-results").on("click", loadSearchResults);
+    $("#recent-searches").on("click", recentSearches);
+    $("#filter-results").on("click", filterResults);
     $(".search-bar").focus(); //so they can immediately start searching
-    $("input").css("transition", "transform .5s, opacity .25s;");
-    $("input").css("transform", "scale(1)");
+    $("input").css("transition", "transform 0.9s, opacity .25s;");
+        $("input").css("transform", "scale(1.0025,1)");
     
     $(".search-bar").on('keyup', function(event){
         //If the enter button is the button being pressed
@@ -31,7 +31,7 @@ $(document).ready(function() {
         }
     });
     $("input").focus(function(){
-        $("input").css("transition", "transform .5s, opacity .25s;");
+        $("input").css("transition", "transform .9s, opacity .25s;");
         $("input").css("transform", "scale(1.0025,1)");
         
     });
@@ -42,24 +42,21 @@ $(document).ready(function() {
 });
 
 function filterResults() {
-    $("#filter-results").innerHTML = "<div>You clicked me!<div>";
-    $("#search-results").innerHTML = "";
-    $("#recent-searches").innerHTML = "";
-    console.log("Test3");
+    $("#filter-res").html("You clicked me!");
+    $("#search-res").html("");
+    $("#recent-sea").html("");
 }
 
 function recentSearches() {
-    $("#recent-searches").innerHTML = "<div>You clicked me!<div>";
-    $("#filter-results").innerHTML = "";
-    $("#search-results").innerHTML = "";
-    console.log("Test2");
+    $("#recent-sea").html("You clicked me!");
+    $("#filter-res").html("");
+    $("#search-res").html("");
 }
 
 function loadSearchResults() {
-    $("#search-results").innerHTML = "<div>You clicked me!<div>";
-    $("#filter-results").innerHTML = "";
-    $("#recent-searches").innerHTML = "";
-    console.log("Test");
+    $("#search-res").html("You clicked me!");
+    $("#filter-res").html("");
+    $("#recent-sea").html("");
 }
 
 function createResultDisplay(item, index, arr) {
