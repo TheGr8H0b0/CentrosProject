@@ -13,6 +13,11 @@ body {
     background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26);
   }
   
+#prev-search {
+    color: crimson;
+    font-size: 1.5rem;
+}
+
 /*gradient animation */
 @keyframes gradient { 
     0%{background-position:0 0}
