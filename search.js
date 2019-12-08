@@ -23,7 +23,6 @@ function grabRecentSearches() {
             pastSearches += localStorage.getItem(i.toString()) + "<br>";
         }
     }
-    console.log(pastSearches);
 }
 
 $(document).ready(function() {
@@ -39,6 +38,7 @@ $(document).ready(function() {
     $(".search-bar").on('keyup', function(event){
         //If the enter button is the button being pressed
         if(event.keyCode ==13){
+            $("#search-results").html("Loading results... \n This may take awhile...");
             var searchQuery = $(".search-bar").val();
             localStorage.setItem("5".toString(),localStorage.getItem("4"));
             localStorage.setItem("4".toString(),localStorage.getItem("3"));
@@ -54,7 +54,6 @@ $(document).ready(function() {
                     var jsonresult = response.split('}}]}');
                     jsonresult[0] += "}}]}";
                     jsonresult = JSON.parse(jsonresult[0]);
-                    console.log(jsonresult);
                     lastSearchData = jsonresult.shopping_results;
                     loadSearchResults();
                 }
@@ -172,6 +171,7 @@ function detectSelectChange() {
             displayStyle = 0;
             break;
     }
+    loadSearchResults();
 }
 
 function recentSearchesRevert() {
@@ -187,45 +187,61 @@ function loadSearchResults() {
     $("#search-results").html("");
     if (displayStyle == 0) {
         for (var i = 0; i < displayAmount; i++) {
-            createResultDisplay(lastSearchData[i]);
-        }
-    } else if (displayStyle == 1) {
-        var displayCopy = lastSearchData;
-        var minAmount = 999999999;
-        for (var i = 0; i < displayAmount; i++) {
-            var itemToLoad = 0;
-            for (var j = 0; j < 100-i; j++) {
-                var num = Number(displayCopy[j].item.price.replace(/[^0-9.-]+/g,""));
-                if (minAmount < num) {
-                    minAmount = num;
-                    itemToLoad = j;
+            if (lastSearchData != undefined) {
+                if (lastSearchData[i] != undefined) {
+                    createResultDisplay(lastSearchData[i]);
                 }
             }
-            createResultDisplay(displayCopy[itemToLoad]);
-            displayCopy[itemToLoad] = displayCopy[0];
-            displayCopy.shift();
         }
     } else if (displayStyle == 2) {
-        var displayCopy = lastSearchData;
-        var maxAmount = 0;
+        var positionsUnused = Array(100).fill(true);
         for (var i = 0; i < displayAmount; i++) {
-            var itemToLoad = 0;
-            for (var j = 0; j < 100-i; j++) {
-                var num = Number(displayCopy[j].item.price.replace(/[^0-9.-]+/g,""));
-                if (maxAmount > num) {
-                    maxAmount = num;
-                    itemToLoad = j;
+            if (lastSearchData[0] != undefined) {
+                var itemToLoad = 0;
+                var minAmount = Number(lastSearchData[0].price.replace(/[^0-9.-]+/g,""));
+                for (var j = 0; j < 100; j++) {
+                    if (lastSearchData[j] != undefined && 
+                        lastSearchData[j].price != undefined) {
+                        var num = Number(lastSearchData[j].price.replace(/[^0-9.-]+/g,""));
+                        if (minAmount < num && positionsUnused[j]) {
+                            console.log("Got here");
+                            minAmount = num;
+                            itemToLoad = j;
+                            positionsUnused[j] = false;
+                        }
+                    }
                 }
+                createResultDisplay(lastSearchData[itemToLoad]);
             }
-            createResultDisplay(displayCopy[itemToLoad]);
-            displayCopy[itemToLoad] = displayCopy[0];
-            displayCopy.shift();
+        }
+    } else if (displayStyle == 1) {
+        var maxAmount = 0;
+        var positionsUnused = Array(100).fill(true);
+        if (lastSearchData[0] != undefined) {
+            var itemToLoad = 0;
+            var maxAmount = Number(lastSearchData[0].price.replace(/[^0-9.-]+/g,""));
+            for (var i = 0; i < displayAmount; i++) {
+                var itemToLoad = 0;
+                for (var j = 0; j < 100; j++) {
+                    if (lastSearchData[j] != undefined && 
+                        lastSearchData[j].price != undefined) {
+                        var num = Number(lastSearchData[j].price.replace(/[^0-9.-]+/g,""));
+                        if (maxAmount > num && positionsUnused[j]) {
+                            console.log("Got here");
+                            maxAmount = num;
+                            itemToLoad = j;
+                            positionsUnused[j] = false;
+                        }
+                    }
+                }
+                createResultDisplay(lastSearchData[itemToLoad]);
+            }
         }
     }
 }
 
 function createResultDisplay(item) {
-    if (item.title != null && item.price != null && item.link && item.thumbnail) {
+    if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
         if (item.description == null) {
             var htmlAppend =
             "<div class='item-container'>" +
@@ -250,7 +266,7 @@ function createResultDisplay(item) {
             "</div>";
 
             $("#search-results").append(htmlAppend);
-        } else {
+        } else if (item != undefined) {
             var htmlAppend =
             "<div class='item-container'>" +
                 "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
