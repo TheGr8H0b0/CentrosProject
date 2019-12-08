@@ -25,8 +25,39 @@ function grabRecentSearches() {
     }
 }
 
+function redirectLoad() {
+    if (sessionStorage.getItem("base") != null && sessionStorage.getItem("base") != undefined) {
+        var storedItem = JSON.parse(sessionStorage.getItem("base"));
+        if (storedItem.time + 5000 >= Date.now()) {
+            $("#search-results").html("Loading results... \n This may take awhile...");
+            var searchQuery = storedItem.searchVal;
+            $(".search-bar").value = searchQuery;
+            localStorage.setItem("5".toString(),localStorage.getItem("4"));
+            localStorage.setItem("4".toString(),localStorage.getItem("3"));
+            localStorage.setItem("3".toString(),localStorage.getItem("2"));
+            localStorage.setItem("2".toString(),localStorage.getItem("1"));
+            localStorage.setItem("1",searchQuery);
+            grabRecentSearches();
+
+            $.ajax({  
+                type: 'GET',
+                url: 'search.php', 
+                data: { query: searchQuery, numResults: 100 },
+                success: function(response) {
+                    var jsonresult = response.split('}}]}');
+                    jsonresult[0] += "}}]}";
+                    jsonresult = JSON.parse(jsonresult[0]);
+                    lastSearchData = jsonresult.shopping_results;
+                    loadSearchResults();
+                }
+            });
+        }
+    }
+}
+
 $(document).ready(function() {
     grabRecentSearches();
+    redirectLoad();
     $("#recent-searches").mouseenter(recentSearches);
     $("#recent-searches").mouseleave(recentSearchesRevert);
     $("#filter-results").mouseenter(filterResults);
@@ -45,6 +76,7 @@ $(document).ready(function() {
             localStorage.setItem("3".toString(),localStorage.getItem("2"));
             localStorage.setItem("2".toString(),localStorage.getItem("1"));
             localStorage.setItem("1",searchQuery);
+            grabRecentSearches();
 
             $.ajax({  
                 type: 'GET',
@@ -85,7 +117,7 @@ function filterResults() {
         '<option value="100"' + sel10 + '>100 results</option>' +
     '</select>' +
     '<br><select id="price-select">' + 
-        '<option value="none"' + selNone + '>None</option>' +
+        '<option value="None"' + selNone + '>None</option>' +
         '<option value="low-high"' + selLow + '>low-high</option>' + 
         '<option value="high-low"' + selHigh + '>high-low</option>' + 
     '</select>');
@@ -185,55 +217,52 @@ function recentSearches() {
 
 function loadSearchResults() {
     $("#search-results").html("");
+    console.log(displayStyle);
     if (displayStyle == 0) {
+        console.log("None");
         for (var i = 0; i < displayAmount; i++) {
-            if (lastSearchData != undefined) {
-                if (lastSearchData[i] != undefined) {
-                    createResultDisplay(lastSearchData[i]);
-                }
+            if (lastSearchData[i] != undefined) {
+                createResultDisplay(lastSearchData[i]);
             }
         }
-    } else if (displayStyle == 2) {
+    } else if (displayStyle == 1) {
         var positionsUnused = Array(100).fill(true);
         for (var i = 0; i < displayAmount; i++) {
             if (lastSearchData[0] != undefined) {
                 var itemToLoad = 0;
-                var minAmount = Number(lastSearchData[0].price.replace(/[^0-9.-]+/g,""));
+                var minAmount = 999999999999;
                 for (var j = 0; j < 100; j++) {
                     if (lastSearchData[j] != undefined && 
                         lastSearchData[j].price != undefined) {
                         var num = Number(lastSearchData[j].price.replace(/[^0-9.-]+/g,""));
-                        if (minAmount < num && positionsUnused[j]) {
-                            console.log("Got here");
+                        if (minAmount > num && positionsUnused[j]) {
                             minAmount = num;
                             itemToLoad = j;
-                            positionsUnused[j] = false;
                         }
                     }
                 }
+                positionsUnused[itemToLoad] = false;
                 createResultDisplay(lastSearchData[itemToLoad]);
             }
         }
-    } else if (displayStyle == 1) {
+    } else if (displayStyle == 2) {
         var maxAmount = 0;
         var positionsUnused = Array(100).fill(true);
         if (lastSearchData[0] != undefined) {
-            var itemToLoad = 0;
-            var maxAmount = Number(lastSearchData[0].price.replace(/[^0-9.-]+/g,""));
             for (var i = 0; i < displayAmount; i++) {
                 var itemToLoad = 0;
+                var maxAmount = 0;
                 for (var j = 0; j < 100; j++) {
                     if (lastSearchData[j] != undefined && 
                         lastSearchData[j].price != undefined) {
                         var num = Number(lastSearchData[j].price.replace(/[^0-9.-]+/g,""));
-                        if (maxAmount > num && positionsUnused[j]) {
-                            console.log("Got here");
+                        if (maxAmount < num && positionsUnused[j]) {
                             maxAmount = num;
                             itemToLoad = j;
-                            positionsUnused[j] = false;
                         }
                     }
                 }
+                positionsUnused[itemToLoad] = false;
                 createResultDisplay(lastSearchData[itemToLoad]);
             }
         }
