@@ -2,19 +2,22 @@
 
 if( isset($_COOKIE['user']) ) { // The User is Logged In
     if( isset($_COOKIE['premium']) ) { // The Logged in User is a PREMIUM User
-        echo '';
+        echo '<h2 class="sub-header">You are a premium user. Thank you for your support!<br>Enjoy your unlimited favorites and ad-free exploration of our site!</h2>';
     }
     else { // The Logged in User is NOT a Premium User
-        echo '';
+        echo '<h2 class="sub=header">Upgrade now!<br>No more ads!<br>Unlimited Favorites!<br>Support Centros!</h2>
+        <div class="button-container">
+            <a href="payment.html" class="btn"><span>Pay Now</span></a>
+        </div>';
     }
 }
 else { // The User is NOT Logged In
-    echo '<div class="upgrade-txt">You are not currently logged in. Log in or Sign Up now to upgrade!</div>
-    <div class="center-button">
-      <a href="login.html"><button type="button">Log In</button></a>
+    echo '<h2 class="sub-header">You are not currently logged in.<br>Log in or Sign Up now to upgrade!</h2>
+    <div class="button-container">
+        <a href="login.html" class="btn"><span>Log In</span></a>
     </div>
-    <div class="center-button">
-      <a href="signup.html"><button type="button">Sign Up</button></a>
+    <div class="button-container">
+        <a href="signup.html" class="btn"><span>Sign Up</span></a>
     </div>';
 }
   
