@@ -42,9 +42,17 @@
                 setcookie('user', $email, $expiryTime);
 
                 // SET PREMIUM COOKIE HERE
-                $userType = $res["usertype"];
-                $statusMessage = $userType;
+                $row = $res->fetch_assoc();
+                $userType = $row["usertype"];
 
+                if($userType == "premium") {
+                    $expiryTime = time() + 60*60*24; // 1 day from now
+                    setcookie('premium', $email, $expiryTime);
+                }
+                else {
+                    $statusMessage = "";
+                }
+                // UPDATE `clients` SET usertype="premium" WHERE username="fake@gmail.com"
                 // END PREMIUM COOKIE CODE
 
             }
