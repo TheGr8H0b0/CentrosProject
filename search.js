@@ -267,6 +267,8 @@ function loadSearchResults() {
             }
         }
     }
+    alert("SEARCH RESULTS LOADED, DWIGHT YOU IGNORANT ...");
+    // OKAY, so click listener stuff here I SUPPOSE
 }
 
 function createResultDisplay(item) {
@@ -282,8 +284,7 @@ function createResultDisplay(item) {
                         "<div class='col-xs-9'>" +
                             "<div class='item-title'>" +
                                 item.title +
-                            "</div>" + 
-                            "<div class='fav-star'>STAR</div>" +
+                            "</div>" +
                             "<div class='price'>" +
                                 item.price + 
                             "</div>" +
@@ -292,7 +293,8 @@ function createResultDisplay(item) {
                             "</div>" +
                         "</div>" + 
                     "</div>" + 
-                "</a>"
+                "</a>" +
+                "<div class='fav-star'>STAR</div>" +
             "</div>";
 
             $("#search-results").append(htmlAppend);
@@ -308,7 +310,6 @@ function createResultDisplay(item) {
                             "<div class='item-title'>" +
                                 item.title +
                             "</div>" +
-                            "<div class='fav-star'>STAR</div>" +
                             "<div class='price'>" +
                                 item.price + 
                             "</div>" +
@@ -317,7 +318,8 @@ function createResultDisplay(item) {
                             "</div>" +
                         "</div>" + 
                     "</div>" + 
-                "</a>"
+                "</a>" +
+                "<div class='fav-star'>STAR</div>" +
             "</div>";
 
             $("#search-results").append(htmlAppend);
