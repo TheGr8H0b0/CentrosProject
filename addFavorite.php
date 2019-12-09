@@ -55,7 +55,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
                 // Get the information for the relevant accounts
                 $favorite = $conn->prepare("INSERT INTO `favorites`(`user`, `title`, `price`, `itemLink`, `imageLink`) VALUES (?,?,?,?,?)");
                 
-                $favorite->bind_param("ssdss", $email, $title, $price, $itemLink, $imgLink);
+                $favorite->bind_param("sssss", $email, $title, $price, $itemLink, $imgLink);
                 $favorite->execute();
 
                 $statusMessage = $title . " added successfully!";
@@ -76,6 +76,8 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
 else{
     $statusMessage = "No POST request received.";
 }
+
+
   
   // Echo the result        
   echo($statusMessage);
