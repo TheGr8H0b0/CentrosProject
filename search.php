@@ -21,7 +21,7 @@ curl_setopt($ch, CURLOPT_URL, "https://app.zenserp.com/api/v2/search?" . http_bu
 
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 	"Content-Type: application/json",
-	"apikey: 5ac89c60-070a-11ea-b430-9177d74aa0f6",
+	"apikey: 518370f0-1aba-11ea-8ee9-275934cf114a",
 ));
 
 $response = curl_exec($ch);
