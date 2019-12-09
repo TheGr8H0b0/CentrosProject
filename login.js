@@ -15,6 +15,7 @@ $(document).ready(function(){
             if(!String(data).includes("Sorry")) {
                 window.location.replace("index.html");
             }
+            
         });
         
         jqxhr.fail(function(jqXHR){

@@ -41,6 +41,12 @@
                 $expiryTime = time() + 60*60*24; // 1 day from now
                 setcookie('user', $email, $expiryTime);
 
+                // SET PREMIUM COOKIE HERE
+                $userType = $res["usertype"];
+                $statusMessage = $userType;
+
+                // END PREMIUM COOKIE CODE
+
             }
             
             $stmt->close();
