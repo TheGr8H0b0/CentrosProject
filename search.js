@@ -273,7 +273,7 @@ function loadSearchResults() {
         var price = $(this).parent().find(".price").text();
         var itemLink = $(this).parent().find(".item-link").attr("href");
         var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-        //console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
+        console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
 
         //Set cookie values for 1 minute to transfer values to addFavorite.php
         var cookieTTLMinutes = "1";
