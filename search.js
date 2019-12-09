@@ -267,8 +267,15 @@ function loadSearchResults() {
             }
         }
     }
-    alert("SEARCH RESULTS LOADED, DWIGHT YOU IGNORANT ...");
-    // OKAY, so click listener stuff here I SUPPOSE
+    // Favorites click Listener code
+    $(".fav-star").on("click", function() {
+        // You'll need to test all of these, some may work, some may not
+        var title = $(this).parent().find(".item-title").text();
+        var price = $(this).parent().find(".price").text();
+        var itemLink = $(this).parent().find(".item-link").attr("href");
+        var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
+        console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
+    });
 }
 
 function createResultDisplay(item) {
