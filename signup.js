@@ -62,7 +62,7 @@ function checkPasswordMatch() {
     var password = $("#password").val();
     var confirmPassword = $("#c-password").val();
     console.log("run");
-    if (password != confirmPassword)
+    if (password != confirmPassword && password.length >= 8)
         $(".password-input").css("background","#e35f5f");
     else{ //restart animation
         $(".password-input").css("background","#82df8d");
