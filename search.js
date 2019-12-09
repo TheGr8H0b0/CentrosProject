@@ -282,7 +282,8 @@ function createResultDisplay(item) {
                         "<div class='col-xs-9'>" +
                             "<div class='item-title'>" +
                                 item.title +
-                            "</div>" +
+                            "</div>" + 
+                            "<div class='fav-star'>STAR</div>" +
                             "<div class='price'>" +
                                 item.price + 
                             "</div>" +
@@ -307,6 +308,7 @@ function createResultDisplay(item) {
                             "<div class='item-title'>" +
                                 item.title +
                             "</div>" +
+                            "<div class='fav-star'>STAR</div>" +
                             "<div class='price'>" +
                                 item.price + 
                             "</div>" +
