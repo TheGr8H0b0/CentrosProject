@@ -36,8 +36,8 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
             $stmt->bind_param("s", $email);
             $stmt->execute();
 
-            $userType = "standard"
-            if(isset($_COOKIE['premium'])){
+            $userType = "standard";
+            if(isset($_COOKIE['premium'])) {
                 $userType = "premium";
             }
             
