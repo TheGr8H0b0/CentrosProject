@@ -29,7 +29,9 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
             $stmt->execute();
             
             $stmt->close();
-
+            
+            $expiryTime = time() + 60*60*24; // 1 day from now
+            setcookie('premium', $email, $expiryTime);
             $statusMessage = "You are now a premium member!";
         }
         
