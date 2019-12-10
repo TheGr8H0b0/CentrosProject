@@ -31,6 +31,9 @@ $(document).ready(function(){
         var title = $(this).parent().find(".item-title").text();
         console.log(title);
       });
+  });
+
+  jqxhr.fail(function(jqXHR){
       console.log("Error: " + jqXHR.status);
   });
 
