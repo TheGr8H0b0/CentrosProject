@@ -286,12 +286,13 @@ function loadSearchResults() {
         var url = "addFavorite.php";
         
         var jqxhr = $.post(url);
+        var textItem = $(this);
         
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
             console.log(data);
-            $(this).html(data);
+            textItem.text(String(data));
         });
         
         jqxhr.fail(function(jqXHR){

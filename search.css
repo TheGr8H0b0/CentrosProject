@@ -78,3 +78,7 @@ body{
 .item-description,.price{
     color: #adb5bd;
 }
+
+.fav-star {
+    cursor: pointer;
+}
