@@ -320,9 +320,8 @@ function createCookie(name, value, minutes) {
         expires = ""; 
     } 
       
-    document.cookie = escape(name) + "=" +  
-        escape(value) + expires + "; path=/"; 
-} 
+    document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/"; 
+}
 
 function createResultDisplay(item) {
     if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
