@@ -285,13 +285,13 @@ function loadSearchResults() {
         //Make an ajax post to addFavorite.php so it can add this item to the database
         var url = "addFavorite.php";
         
-        console.log("ADDING FAVORITE...");
         var jqxhr = $.post(url);
         
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
             console.log(data);
+            $(this).html(data);
         });
         
         jqxhr.fail(function(jqXHR){
@@ -347,7 +347,7 @@ function createResultDisplay(item) {
                         "</div>" + 
                     "</div>" + 
                 "</a>" +
-                "<div class='fav-star'>STAR</div>" +
+                "<div class='fav-star'>Click to Favorite</div>" +
             "</div>";
 
             $("#search-results").append(htmlAppend);
@@ -372,7 +372,7 @@ function createResultDisplay(item) {
                         "</div>" + 
                     "</div>" + 
                 "</a>" +
-                "<div class='fav-star'>STAR</div>" +
+                "<div class='fav-star'>Click to Favorite</div>" +
             "</div>";
 
             $("#search-results").append(htmlAppend);

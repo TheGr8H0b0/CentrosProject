@@ -17,25 +17,26 @@ $(document).ready(function(){
     });
   };
   
-init();
+  init();
 
-var url = "favorites.php";
-    
-// serialize packages the input values in the form
-var jqxhr = $.post(url);
+  var url = "favorites.php";
+      
+  // serialize packages the input values in the form
+  var jqxhr = $.post(url);
 
-// set up callbacks
-jqxhr.done(function(data){
-    $("#fav-results").html(data);
-});
+  // set up callbacks
+  jqxhr.done(function(data){
+      $("#fav-results").html(data);
+      $(".unstar").on("click", function() {
+        var title = $(this).parent().find(".item-title").text();
+        console.log(title);
+      });
+      console.log("Error: " + jqXHR.status);
+  });
 
-jqxhr.fail(function(jqXHR){
-    console.log("Error: " + jqXHR.status);
-});
-
-jqxhr.always(function(){
-    console.log("Done with AJAX request.");
-});
+  jqxhr.always(function(){
+      console.log("Done with AJAX request.");
+  });
 
 
 

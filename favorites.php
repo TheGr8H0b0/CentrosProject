@@ -33,24 +33,24 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
             // var to hold return html
             $favs = "";
             while($row = $res->fetch_assoc()){
-                $favs +=
-                "<div class='item'>" +
-                    "<a class='item-link' target='_blank' href=" + $row["itemLink"] + ">" +
-                        "<div class='row'>" + 
-                            "<div class='col-xs-3'>" +
-                                "<img src=" + "IMAGE LINK HERE" + " alt=" + $row["title"] + ">" +
-                            "</div>" +
-                            "<div class='col-xs-9'>" +
-                            "<div class='item-title'>" +
-                                $row["title"] +
-                            "</div>" +
-                            "<div class='price'>" +
-                                $row["price"] + 
-                            "</div>" +
-                        "</div>" + 
-                    "</div>" + 
-                "</a>" +
-                "<div class='unstar'>Click to Un-Favorite</div>" +
+                $favs .=
+                "<div class='item'>" .
+                    "<a class='item-link' target='_blank' href=" . $row["itemLink"] . ">" .
+                        "<div class='row'>" . 
+                            "<div class='col-xs-3'>" .
+                                "<img src='" . $row["imageLink"] . "' alt=" . $row["title"] . ">" .
+                            "</div>" .
+                            "<div class='col-xs-9'>" .
+                            "<div class='item-title'>" .
+                                $row["title"] .
+                            "</div>" .
+                            "<div class='price'>" .
+                                $row["price"] . 
+                            "</div>" .
+                        "</div>" . 
+                    "</div>" . 
+                "</a>" .
+                "<div class='unstar'>Click to Un-Favorite " . $row["title"] . "</div>" .
             "</div>";            
 
             }
