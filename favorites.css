@@ -7,7 +7,3 @@
 .item-description,.price,.small-price,#descOverlay{
     color: #adb5bd;
 }
-
-.unstar {
-    cursor: pointer;
-}

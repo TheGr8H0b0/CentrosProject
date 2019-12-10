@@ -50,7 +50,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
                         "</div>" . 
                     "</div>" . 
                 "</a>" .
-                "<div class='unstar'>Click to Un-Favorite " . $row["title"] . "</div>" .
+                "<div class='unstar' style='cursor: pointer;'>Click to Un-Favorite " . $row["title"] . "</div>" .
             "</div>";            
 
             }
