@@ -8,12 +8,17 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
         $statusMessage = "Sorry, you are not logged in";
     }
     // Check the fields are present
-    else if(isset($_COOKIE['title']) && isset($_COOKIE['price']) && isset($_COOKIE['itemLink']) && isset($_COOKIE['imgLink'])){
+    else if(isset($_COOKIE['title']) && isset($_COOKIE['price']) && isset($_COOKIE['itemLink'])) {
           
         $title = $_COOKIE['title'];
         $price = $_COOKIE['price'];
         $itemLink = $_COOKIE['itemLink'];
-        $imgLink = $_COOKIE['imgLink'];
+        if(isset($_COOKIE['imgLink'])) {
+            $imgLink = $_COOKIE['imgLink'];
+        }
+        else {
+            $imgLink = "";
+        }
         $email = $_COOKIE['user'];
 
         // Start the DB operations
@@ -50,7 +55,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
                 // Get the information for the relevant accounts
                 $favorite = $conn->prepare("INSERT INTO `favorites`(`user`, `title`, `price`, `itemLink`, `imageLink`) VALUES (?,?,?,?,?)");
                 
-                $favorite->bind_param("ssdss", $email, $title, $price, $itemLink, $imgLink);
+                $favorite->bind_param("sssss", $email, $title, $price, $itemLink, $imgLink);
                 $favorite->execute();
 
                 $statusMessage = $title . " added successfully!";
@@ -71,6 +76,8 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
 else{
     $statusMessage = "No POST request received.";
 }
+
+
   
   // Echo the result        
   echo($statusMessage);

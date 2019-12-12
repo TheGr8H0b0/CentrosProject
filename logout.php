@@ -7,5 +7,6 @@ setcookie('title', '', time() - 3600);
 setcookie('price', '', time() - 3600);
 setcookie('itemLink', '', time() - 3600);
 setcookie('imgLink', '', time() - 3600);
+setcookie('remove', '', time() - 3600);
   
 ?>

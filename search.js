@@ -278,7 +278,7 @@ function loadSearchResults() {
         var price = $(this).parent().find(".price").text();
         var itemLink = $(this).parent().find(".item-link").attr("href");
         var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-        //console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
+        console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
 
         //Set cookie values for 1 minute to transfer values to addFavorite.php
         var cookieTTLMinutes = "1";
@@ -290,13 +290,14 @@ function loadSearchResults() {
         //Make an ajax post to addFavorite.php so it can add this item to the database
         var url = "addFavorite.php";
         
-        console.log("ADDING FAVORITE...");
         var jqxhr = $.post(url);
+        var textItem = $(this);
         
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
             console.log(data);
+            textItem.text(String(data));
         });
         
         jqxhr.fail(function(jqXHR){
@@ -309,10 +310,23 @@ function loadSearchResults() {
         });
 
 
+        //Animate star 
+        if($(this).children().hasClass("fa")){
+            $(this).children().removeClass("rotate"); 
+            $(this).children().removeClass("fa");
+        }  
+        else{ //file in star and add to favorites
+            $(this).children().addClass("fa");
+            $(this).children().addClass("rotate");
+             // You'll need to test all of these, some may work, some may not
+            var title = $(this).parent().find(".item-title").text();
+            var price = $(this).parent().find(".price").text();
+            var itemLink = $(this).parent().find(".item-link").attr("href");
+            var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
+            console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
+        }
     });
 }
-
-// Function to create a cookie (to be passed to addFavorite.php)
 function createCookie(name, value, minutes) { 
     var expires; 
       
@@ -325,10 +339,8 @@ function createCookie(name, value, minutes) {
         expires = ""; 
     } 
       
-    document.cookie = escape(name) + "=" +  
-        escape(value) + expires + "; path=/"; 
-} 
-
+    document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/"; 
+}
 function createResultDisplay(item) {
     if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
         if (item.description == null) {
@@ -359,6 +371,7 @@ function createResultDisplay(item) {
         } else if (item != undefined) {
             var htmlAppend =
             "<div class='item-container'>" +
+                "<div class='fav-star'><i class='far fa-star fav-star-icon'></i></div>" +
                 "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
                     "<div class='row'>" + 
                         "<div class='col-xs-3'>" +
@@ -377,7 +390,6 @@ function createResultDisplay(item) {
                         "</div>" + 
                     "</div>" + 
                 "</a>" +
-                "<div class='fav-star'>STAR</div>" +
             "</div>";
 
             $("#search-results").append(htmlAppend);

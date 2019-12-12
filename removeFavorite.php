@@ -1,12 +1,17 @@
 <?php
 $statusMessage = "";
-
-// Since this request will alter the DB, we use POST instead of GET
+  
+  // Since this request will alter the DB, we use POST instead of GET
 if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
-    // Check the fields are present
-    if(isset($_COOKIE["user"])) {
-        
-        $email = $_COOKIE["user"];
+    if(isset($_COOKIE['user'])) {
+
+        $email = $_COOKIE['user'];
+        if(isset($_COOKIE["remove"])) {
+            $title = $_COOKIE["remove"];
+        }
+        else {
+            $title = "";
+        }
 
         // Start the DB operations
         $servername = "127.0.0.1";
@@ -23,29 +28,27 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
         }
         else {
             // Get the information for the relevant accounts
-            $stmt = $conn->prepare("UPDATE `clients` SET `usertype`='premium' WHERE username=?");
+            $stmt = $conn->prepare("DELETE FROM favorites WHERE user=? AND title=?");
             
-            $stmt->bind_param("s", $email);
+            $stmt->bind_param("ss", $email, $title);
             $stmt->execute();
             
-            $stmt->close();
+            $statusMessage = "Item Removed Successfully";
             
-            $expiryTime = time() + 60*60*24; // 1 day from now
-            setcookie('premium', $email, $expiryTime);
-            $statusMessage = "You are now a premium member!";
+            $stmt->close();
         }
         
         $conn->close();
-        
+          
     }
     else{
-        $statusMessage = "You are not logged in";
+        $statusMessage = "Sorry, you are not logged in";
     }
 }
 else{
     $statusMessage = "No POST request received.";
 }
-
+  
 // Echo the result        
 echo($statusMessage);
 
