@@ -14,7 +14,7 @@ body {
   }
   
 #prev-search {
-    color: crimson;
+    color: #8bf7f1;
     font-size: 1.5rem;
 }
 
@@ -71,7 +71,7 @@ body{
 
 .item-container{
     border-style: solid;
-    border-color: #003d7f;
+    border-color: #041c36;
     padding-left: 15px;
     margin: 10px;
 }

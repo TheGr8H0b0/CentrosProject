@@ -128,6 +128,11 @@ function filterResults() {
 }
 
 function filterResultsRevert() {
+    var now = Date.now();
+    var revertTime = Date.now() + 3000;
+    while (revertTime >= now) {
+        now = Date.now();
+    } 
     $("#filter-results").html(' Filter Results');
     $("#filter-results").css("font-size","unset");
 }
