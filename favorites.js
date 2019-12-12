@@ -64,9 +64,26 @@ $(document).ready(function(){
       console.log("Done with AJAX request.");
   });
 
-
+  //star animation
+  $(".fav-star").on("click", function() {
+    removeFavorite(this);
+  });
 
 });
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function removeFavorite(item){
+
+  $(item).children().removeClass("fa");
+  $(item).children().addClass("rotate"); 
+
+  await sleep(1100);
+  $(item).parent().parent().addClass("hello");
+  $(item).parent().parent().css("visibility", "hidden");
+  
+}
 
 // Function to create a cookie (to be passed to addFavorite.php)
 function createCookie(name, value, minutes) { 

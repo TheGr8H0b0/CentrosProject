@@ -269,12 +269,13 @@ function loadSearchResults() {
     }
     // Favorites click Listener code
     $(".fav-star").on("click", function() {
-        $(this).children().addClass("rotate"); //expirimental
         if($(this).children().hasClass("fa")){
+            $(this).children().removeClass("rotate"); 
             $(this).children().removeClass("fa");
         }  
         else{ //file in star and add to favorites
             $(this).children().addClass("fa");
+            $(this).children().addClass("rotate");
              // You'll need to test all of these, some may work, some may not
             var title = $(this).parent().find(".item-title").text();
             var price = $(this).parent().find(".price").text();
