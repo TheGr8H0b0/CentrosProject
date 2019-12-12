@@ -15,12 +15,13 @@ var selHigh = "";
 var selLow = "";
 var selNone = 'selected="selected"';
 var pastSearches = "";
+var revertTime = Date.now() + 2400;
 
 function grabRecentSearches() {
     pastSearches = "";
     for (var i = 1;i <= 5; i++) {
-        if (localStorage.getItem(i.toString()) != null) {
-            pastSearches += localStorage.getItem(i.toString()) + "<br>";
+        if (localStorage.getItem(i.toString()) != null && localStorage.getItem(i.toString()) != "null") {
+            pastSearches += ('<div id="prev-search">' + localStorage.getItem(i.toString()) + "</div>");
         }
     }
 }
@@ -125,16 +126,27 @@ function filterResults() {
     $("#filter-results").css("font-size","2.5rem");
     $("#res-select").css("font-size","1.5rem");
     $("#price-select").css("font-size","1.5rem");
+    revertTime = Date.now() + 2400;
 }
 
 function filterResultsRevert() {
-    var now = Date.now();
-    var revertTime = Date.now() + 3000;
-    while (revertTime >= now) {
-        now = Date.now();
-    } 
-    $("#filter-results").html(' Filter Results');
-    $("#filter-results").css("font-size","unset");
+    var delay = makeDelay(2500);
+    delay(timeCheck);
+}
+
+function makeDelay(ms) {
+    var timer = 0;
+    return( function(callback) {
+        clearTimeout(timer);
+        timer = setTimeout(callback, ms);
+    });
+}
+
+function timeCheck() {
+    if (Date.now() > revertTime) {
+        $("#filter-results").html(' Filter Results');
+        $("#filter-results").css("font-size","unset");
+    }
 }
 
 function detectSelectChange() {
@@ -216,7 +228,8 @@ function recentSearchesRevert() {
 }
 
 function recentSearches() {
-    $("#recent-searches").html('<div id="update">Recent Searches</div><div id="prev-search">' + pastSearches + '</div>');
+    $("#recent-searches").html('<div id="update">Recent Searches</div>' +
+        '<div id="prev-search">' + pastSearches + '</div>');
     $("#update").css("font-size","2.5rem");
 }
 
