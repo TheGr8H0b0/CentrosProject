@@ -38,15 +38,6 @@ $(document).ready(function() {
             showFavorites();
         }
     });
-
-    jqxhr.fail(function(jqXHR){
-        console.log("Error: " + jqXHR.status);
-    });
-
-    jqxhr.always(function(){
-        //Within ajax.always, delete the cookie
-        console.log("Done with AJAX request.");
-    });
   //end
 
   // Favorites click Listener code
@@ -64,15 +55,6 @@ function showFavorites() {
     // set up callbacks
     jqxhr.done(function(data){
         $("#favorites").html(data);
-    });
-    
-    jqxhr.fail(function(jqXHR){
-        console.log("Error: " + jqXHR.status);
-    });
-    
-    jqxhr.always(function(){
-        //Within ajax.always, delete the cookie
-        console.log("Done with AJAX request.");
     });
 
 }

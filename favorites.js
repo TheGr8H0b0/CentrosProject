@@ -22,7 +22,6 @@ $(document).ready(function(){
         removeFavorite(this);
 
         var title = $(this).parent().find(".item-title").text();
-        console.log(title);
 
         var url = "removeFavorite.php";
         createCookie("remove",title,"1");
@@ -37,24 +36,7 @@ $(document).ready(function(){
               updateNumFavorites();
           } 
         });
-      
-        jqxhr.fail(function(jqXHR){
-            console.log("Error: " + jqXHR.status);
-        });
-      
-        jqxhr.always(function(){
-            console.log("Done with AJAX request.");
-        });
-
       });
-  });
-
-  jqxhr.fail(function(jqXHR){
-      console.log("Error: " + jqXHR.status);
-  });
-
-  jqxhr.always(function(){
-      console.log("Done with AJAX request.");
   });
 
   //star animation
@@ -77,15 +59,6 @@ function updateNumFavorites() {
         $("#num-favs").html(String(data));
     } 
   });
-
-  jqxhr.fail(function(jqXHR){
-      console.log("Error: " + jqXHR.status);
-  });
-
-  jqxhr.always(function(){
-      console.log("Done with AJAX request.");
-  });
-
 }
 
 function sleep(ms) {
