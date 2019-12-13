@@ -140,9 +140,29 @@ function filterResults() {
     revertTime = Date.now() + 2400;
 }
 
-function filterResultsRevert() {
-    var delay = makeDelay(2500);
-    delay(timeCheck);
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+async function filterResultsRevert(item){
+    if (navigator.userAgent.indexOf("Firefox") >= 0) {
+        await sleep(2000);
+        if (Date.now() > revertTime) {
+            $("#res-select").addClass("fade");
+            $("#price-select").addClass("fade");
+            await sleep(850);
+            $("#filter-results").html(' Filter Results');
+            $("#filter-results").css("font-size","unset");
+        }
+    } else {
+        $("#res-select").addClass("fade");
+        $("#price-select").addClass("fade");
+        await sleep(800);
+        if (Date.now() > revertTime) {
+            $("#filter-results").html(' Filter Results');
+            $("#filter-results").css("font-size","unset");
+        }
+    }
 }
 
 function makeDelay(ms) {
@@ -151,13 +171,6 @@ function makeDelay(ms) {
         clearTimeout(timer);
         timer = setTimeout(callback, ms);
     });
-}
-
-function timeCheck() {
-    if (Date.now() > revertTime) {
-        $("#filter-results").html(' Filter Results');
-        $("#filter-results").css("font-size","unset");
-    }
 }
 
 function detectSelectChange() {
@@ -231,24 +244,30 @@ function detectSelectChange() {
             displayStyle = 0;
             break;
     }
-    loadSearchResults();
+    if (lastSearchData != undefined) {
+        loadSearchResults();
+    }
 }
 
-function recentSearchesRevert() {
+function revertRecent() {
     $("#recent-searches").text("Recent Searches");
 }
 
+function recentSearchesRevert() {
+    $("#prev-search-container").addClass("fade");
+    var delay = makeDelay(800);
+    delay(revertRecent);
+}
+
 function recentSearches() {
-    $("#recent-searches").html('<div id="update">Recent Searches</div>' +
-        '<div id="prev-search">' + pastSearches + '</div>');
+    $("#prev-search-container").removeClass("fade");
+    $("#recent-searches").html('<div id="update">Recent Searches</div><div id="prev-search-container">' + pastSearches + '</div>');
     $("#update").css("font-size","2.5rem");
 }
 
 function loadSearchResults() {
     $("#search-results").html("");
-    console.log(displayStyle);
     if (displayStyle == 0) {
-        console.log("None");
         for (var i = 0; i < displayAmount; i++) {
             if (lastSearchData[i] != undefined) {
                 createResultDisplay(lastSearchData[i]);
@@ -314,14 +333,12 @@ function loadSearchResults() {
             var price = $(this).parent().find(".price").text();
             var itemLink = $(this).parent().find(".item-link").attr("href");
             var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-            console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
         }
 
         var title = $(this).parent().find(".item-title").text();
         var price = $(this).parent().find(".price").text();
         var itemLink = $(this).parent().find(".item-link").attr("href");
         var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-        console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
 
         //Set cookie values for 1 minute to transfer values to addFavorite.php
         var cookieTTLMinutes = "1";
@@ -339,11 +356,12 @@ function loadSearchResults() {
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
-            console.log(data);
-            textItem.text(String(data));
+            //textItem.text(String(data));
             if(String(data) == "NOT LOGGED IN") {
-                //window.location.replace("login.html");
                 textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
+            }
+            else if(String(data) == "MAX 5 FILLED") {
+                alert("Sorry, you already have your max of 5 favorites saved. Please upgrade your account to premium to add more than 5 favorites");
             }
         });
 

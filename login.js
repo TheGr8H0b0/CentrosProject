@@ -10,6 +10,11 @@ $(document).ready(function() {
             $("#response").html("You must input your email and password");
             return;
         }
+
+        if(!validateEmail(email)) {
+            $("#response").html("Sorry, you must input a valid email");
+            return;
+        }
         
         var url = "login.php";
         
@@ -36,6 +41,10 @@ $(document).ready(function() {
 
     });
 
+    function validateEmail(email) {
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(String(email).toLowerCase());
+    }
 
     function getCookie(name) {
         var dc = document.cookie;
