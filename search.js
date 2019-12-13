@@ -250,7 +250,7 @@ function recentSearches() {
     $("#update").css("font-size","2.5rem");
 }
 
-async function loadSearchResults() {
+ async function loadSearchResults() {
     $("#search-results").html("");
     console.log(displayStyle);
     if (displayStyle == 0) {
@@ -302,8 +302,10 @@ async function loadSearchResults() {
             }
         }
     }
+    console.log("completed");
     // Favorites click Listener code
     $(".fav-star").on("click", function() {
+      console.log("CLICKED STAR");
         //Animate star
         if($(this).children().hasClass("fa")){ //remove from favorites
             $(this).children().removeClass("rotate");
@@ -402,59 +404,7 @@ function isFavorited(item){
           isFA = "";
       }
       console.log("creating item");
-      if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
-          if (item.description == null) {
-              var htmlAppend =
-              "<div class='item-container'>" +
-              "<div class='fav-star'><i class='far " + isFA +  "fa-star fav-star-icon'></i></div>" +
-                  "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
-                      "<div class='row'>" +
-                          "<div class='col-xs-3'>" +
-                              "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
-                          "</div>" +
-                          "<div class='col-xs-9'>" +
-                              "<div class='item-title'>" +
-                                  item.title +
-                              "</div>" +
-                              "<div class='price'>" +
-                                  item.price +
-                              "</div>" +
-                              "<div class='item-description'>" +
-                                  "No description was given for this product." +
-                              "</div>" +
-                          "</div>" +
-                      "</div>" +
-                  "</a>" +
-              "</div>";
-
-              $("#search-results").append(htmlAppend);
-          } else if (item != undefined) {
-              var htmlAppend =
-              "<div class='item-container'>" +
-                  "<div class='fav-star'><i class='far " + isFA +  " fa-star fav-star-icon'></i></div>" +
-                  "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
-                      "<div class='row'>" +
-                          "<div class='col-xs-3'>" +
-                              "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
-                          "</div>" +
-                          "<div class='col-xs-9'>" +
-                              "<div class='item-title'>" +
-                                  item.title +
-                              "</div>" +
-                              "<div class='price'>" +
-                                  item.price +
-                              "</div>" +
-                              "<div class='item-description'>" +
-                                  item.description +
-                              "</div>" +
-                          "</div>" +
-                      "</div>" +
-                  "</a>" +
-              "</div>";
-
-              $("#search-results").append(htmlAppend);
-          }
-      }
+      buildItem(item);
   });
 
   jqxhr.fail(function(jqXHR){
@@ -462,10 +412,67 @@ function isFavorited(item){
   });
 
   jqxhr.always(function(){
-    
+
   });
 }
+function buildItem(item){
+  if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
+      if (item.description == null) {
+          var htmlAppend =
+          "<div class='item-container'>" +
+          "<div class='fav-star'><i class='far " + isFA +  "fa-star fav-star-icon'></i></div>" +
+              "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
+                  "<div class='row'>" +
+                      "<div class='col-xs-3'>" +
+                          "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
+                      "</div>" +
+                      "<div class='col-xs-9'>" +
+                          "<div class='item-title'>" +
+                              item.title +
+                          "</div>" +
+                          "<div class='price'>" +
+                              item.price +
+                          "</div>" +
+                          "<div class='item-description'>" +
+                              "No description was given for this product." +
+                          "</div>" +
+                      "</div>" +
+                  "</div>" +
+              "</a>" +
+          "</div>";
 
-async function createResultDisplay(item) {
-    isFavorited(item);
+          $("#search-results").append(htmlAppend);
+      } else if (item != undefined) {
+          var htmlAppend =
+          "<div class='item-container'>" +
+              "<div class='fav-star'><i class='far " + isFA +  "fa-star fav-star-icon'></i></div>" +
+              "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
+                  "<div class='row'>" +
+                      "<div class='col-xs-3'>" +
+                          "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
+                      "</div>" +
+                      "<div class='col-xs-9'>" +
+                          "<div class='item-title'>" +
+                              item.title +
+                          "</div>" +
+                          "<div class='price'>" +
+                              item.price +
+                          "</div>" +
+                          "<div class='item-description'>" +
+                              item.description +
+                          "</div>" +
+                      "</div>" +
+                  "</div>" +
+              "</a>" +
+          "</div>";
+
+          $("#search-results").append(htmlAppend);
+      }
+    }
+}
+
+function createResultDisplay(item) {
+    // isFavorited(item);
+    isFA="";
+    buildItem(item);
 }
