@@ -130,24 +130,34 @@ function filterResults() {
         $("#res-select").css("font-size","1.5rem");
         $("#price-select").css("font-size","1.5rem");
     }
-    revertTime = Date.now() + 2000;
+    revertTime = Date.now() + 800;
 }
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
   
-  async function filterResultsRevert(item){
-      console.log(navigator.userAgent.indexOf("Firefox"));
-    await sleep(2000);
-    if (Date.now() > revertTime) {
+async function filterResultsRevert(item){
+    console.log(navigator.userAgent.indexOf("Firefox"));
+    if (navigator.userAgent.indexOf("Firefox") >= 0) {
+        await sleep(2000);
+        if (Date.now() > revertTime) {
+            $("#res-select").addClass("fade");
+            $("#price-select").addClass("fade");
+            await sleep(850);
+            $("#filter-results").html(' Filter Results');
+            $("#filter-results").css("font-size","unset");
+        }
+    } else {
         $("#res-select").addClass("fade");
         $("#price-select").addClass("fade");
-        await sleep(850);
-        $("#filter-results").html(' Filter Results');
-        $("#filter-results").css("font-size","unset");
+        await sleep(800);
+        if (Date.now() > revertTime) {
+            $("#filter-results").html(' Filter Results');
+            $("#filter-results").css("font-size","unset");
+        }
     }
-  }
+}
 
 function makeDelay(ms) {
     var timer = 0;
