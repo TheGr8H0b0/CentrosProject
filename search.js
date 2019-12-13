@@ -364,16 +364,6 @@ function loadSearchResults() {
                 alert("Sorry, you already have your max of 5 favorites saved. Please upgrade your account to premium to add more than 5 favorites");
             }
         });
-
-        jqxhr.fail(function(jqXHR){
-            console.log("Error: " + jqXHR.status);
-        });
-
-        jqxhr.always(function(){
-            //Within ajax.always, delete the cookie
-            console.log("Done with AJAX request.");
-        });
-
     });
 }
 function createCookie(name, value, minutes) {
@@ -395,7 +385,6 @@ function createResultDisplay(item) {
     //Create a cookie with the item link so we can access it from the PHP page
     var cookieTTLMinutes = "1";
     createCookie("itemLink",item.link,cookieTTLMinutes);
-    console.log("created isFavorite cookie");
 
     //Assuming our user is logged in, we call the PHP page
     //if user isn't logged in, functionality shouldn't work
@@ -403,25 +392,15 @@ function createResultDisplay(item) {
     var jqxhr = $.post(url);
 
     //Run through our AJAX request to get the result of 'if user has favorited this item'
-    var isFA = ""
-    console.log("starting isFavorite AJAX request");
+    var isFA = "";
 
     // set up callbacks
     jqxhr.done(function(data){
         //Use the response to the ajax post to give feedback
-        console.log("AJAX isFavorite result: "+data);
         if(String(data) == "TRUE") {
             isFA = "fa"
         }
     });
-    jqxhr.fail(function(jqXHR){
-        console.log("Error: " + jqXHR.status);
-    });
-    jqxhr.always(function(){
-        //Within ajax.always, delete the cookie
-        console.log("Done with AJAX isFavorite request.");
-    });
-    console.log("Creating item");
 
     if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
         if (item.description == null) {
