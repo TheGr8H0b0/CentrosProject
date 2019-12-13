@@ -105,6 +105,8 @@ $(document).ready(function() {
 });
 
 function filterResults() {
+    $("#res-select").removeClass("fade");
+    $("#price-select").removeClass("fade");
     $("#filter-results").html(' Filter Results <br><select id="res-select">' +
         '<option value="10"' + sel1 + '>10 results</option>' +
         '<option value="20"' + sel2 + '>20 results</option>' +
@@ -126,22 +128,13 @@ function filterResults() {
     $("#filter-results").css("font-size","2.5rem");
     $("#res-select").css("font-size","1.5rem");
     $("#price-select").css("font-size","1.5rem");
-   /* $("#res-select").animate([
-        // keyframes
-        { transform: 'scale(0.5,0.5)' }, 
-        { color: '#431236', offset: 0.3},
-        { transform: 'scale(1.1,1.1)' }
-      ], { 
-        // timing options
-        duration: 1000,
-        iterations: Infinity
-      });
-      */
-    revertTime = Date.now() + 2400;
+    revertTime = Date.now() + 1550;
 }
 
 function filterResultsRevert() {
-    var delay = makeDelay(2500);
+    var delay = makeDelay(1500);
+    $("#res-select").addClass("fade");
+    $("#price-select").addClass("fade");
     delay(timeCheck);
 }
 
@@ -234,13 +227,19 @@ function detectSelectChange() {
     loadSearchResults();
 }
 
-function recentSearchesRevert() {
+function revertRecent() {
     $("#recent-searches").text("Recent Searches");
 }
 
+function recentSearchesRevert() {
+    $("#prev-search").addClass("fade-up");
+    var delay = makeDelay(800);
+    delay(revertRecent);
+}
+
 function recentSearches() {
-    $("#recent-searches").html('<div id="update">Recent Searches</div>' +
-        '<div id="prev-search">' + pastSearches + '</div>');
+    $("#prev-search").removeClass("fade-up");
+    $("#recent-searches").html('<div id="update">Recent Searches</div>' + pastSearches);
     $("#update").css("font-size","2.5rem");
 }
 
