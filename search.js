@@ -238,7 +238,9 @@ function detectSelectChange() {
             displayStyle = 0;
             break;
     }
-    loadSearchResults();
+    if (lastSearchData != undefined) {
+        loadSearchResults();
+    }
 }
 
 function revertRecent() {
