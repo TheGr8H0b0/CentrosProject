@@ -23,7 +23,7 @@ $(document).ready(function() {
     });
 
     //star animation
-  $(".fav-star").on("click", function() {
+  $(".fa").on("click", function() {
     removeFavorite(this);
   });
 });
@@ -39,8 +39,7 @@ function sleep(ms) {
     $(item).children().addClass("rotate"); 
 
     await sleep(1100);
-    $(item).parent().parent().parent().addClass("hello");
-    $(item).parent().parent().parent().css("visibility", "hidden");
+    $(item).parent().parent().parent().html("");
     
     }
 
