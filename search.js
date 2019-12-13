@@ -126,6 +126,17 @@ function filterResults() {
     $("#filter-results").css("font-size","2.5rem");
     $("#res-select").css("font-size","1.5rem");
     $("#price-select").css("font-size","1.5rem");
+   /* $("#res-select").animate([
+        // keyframes
+        { transform: 'scale(0.5,0.5)' }, 
+        { color: '#431236', offset: 0.3},
+        { transform: 'scale(1.1,1.1)' }
+      ], { 
+        // timing options
+        duration: 1000,
+        iterations: Infinity
+      });
+      */
     revertTime = Date.now() + 2400;
 }
 
