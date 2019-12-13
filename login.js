@@ -3,6 +3,14 @@ $(document).ready(function() {
     $("#login-btn").on("click", function(e){
         e.preventDefault();
         
+        var email = $("#email").val();
+        var pass = $("#pass").val();
+
+        if(email == "" || pass == "") {
+            $("#response").html("You must input your email and password");
+            return;
+        }
+        
         var url = "login.php";
         
         // serialize packages the input values in the form
