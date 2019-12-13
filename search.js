@@ -328,7 +328,6 @@ function loadSearchResults() {
             console.log(data);
             textItem.text(String(data));
             if(String(data) == "NOT LOGGED IN") {
-                //window.location.replace("login.html");
                 textItem.html("<a href='login.html'>LOGIN WITH ME</a>");
             }
         });
