@@ -62,11 +62,11 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
           
     }
     else{
-        console.log("Sorry, you are not logged in");
+        $statusMessage = "";
     }
 }
 else{
-    console.log("No POST request received.");
+    $statusMessage = "";
 }
 
 // Echo the result        
