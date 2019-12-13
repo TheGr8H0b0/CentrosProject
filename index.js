@@ -27,57 +27,46 @@ $(document).ready(function() {
     removeFavorite(this);
   });
 
+  //start
+    var url = "rememberme.php";
+        
+    var jqxhr = $.post(url);
+
+    // set up callbacks
+    jqxhr.done(function(data){
+        if(String(data).includes("My Account")) {
+            showFavorites();
+        }
+    });
+
+    jqxhr.fail(function(jqXHR){
+        console.log("Error: " + jqXHR.status);
+    });
+
+    jqxhr.always(function(){
+        //Within ajax.always, delete the cookie
+        console.log("Done with AJAX request.");
+    });
+  //end
+
   // Favorites click Listener code
   $(".fav-star").on("click", function() {
-        //Animate star 
-        if($(this).children().hasClass("fa")){ //remove from favorites
-            $(this).children().removeClass("rotate"); 
-            $(this).children().removeClass("fa");
-        }  
-        else if ($(this).children().hasClass("login-link")){
-            //Do nothing this is when you are not logged in
-        }
-        else{ //fill in star and add to favorites
-            $(this).children().addClass("fa");
-            $(this).children().addClass("rotate");
-            // You'll need to test all of these, some may work, some may not
-            var title = $(this).parent().find(".item-title").text();
-            var price = $(this).parent().find(".price").text();
-            var itemLink = $(this).parent().find(".item-link").attr("href");
-            var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-        }
-
-        var title = $(this).parent().find(".item-title").text();
-        var price = $(this).parent().find(".price").text();
-        var itemLink = $(this).parent().find(".item-link").attr("href");
-        var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-        
-        //Set cookie values for 1 minute to transfer values to addFavorite.php
-        var cookieTTLMinutes = "1";
-        createCookie("title",title,cookieTTLMinutes);
-        createCookie("price",price,cookieTTLMinutes);
-        createCookie("itemLink",itemLink,cookieTTLMinutes);
-        createCookie("imgLink",imgLink,cookieTTLMinutes);
-
-        //Make an ajax post to addFavorite.php so it can add this item to the database
-        var url = "addFavorite.php";
-        
-        var jqxhr = $.post(url);
-        var textItem = $(this);
-        
-        // set up callbacks
-        jqxhr.done(function(data){
-            //Use the response to the ajax post to give feedback
-            //textItem.text(String(data));
-            if(String(data) == "NOT LOGGED IN") {
-                textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
-            }
-            else if(String(data) == "MAX 5 FILLED") {
-                alert("Sorry, you already have your max of 5 favorites saved. Please upgrade your account to premium to add more than 5 favorites");
-            }
-        });
+        $(this).html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
     });
 });
+
+// I STILL NEED TO CALL THIS FUNCTION IF THE USER IS LOGGED IN!!!!
+function showFavorites() {
+    var url = "index.php";
+        
+    var jqxhr = $.post(url);
+    
+    // set up callbacks
+    jqxhr.done(function(data){
+        $("#favorites").html(data);
+    });
+
+}
 
 
 function createCookie(name, value, minutes) { 
