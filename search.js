@@ -345,7 +345,7 @@ function loadSearchResults() {
                 textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
             }
             else if(String(data) == "MAX 5 FILLED") {
-                alert("Sorry, you already have your max of 5 favorites saved.  Please go to your favorites page and unfavorite an item to favorite this item");
+                alert("Sorry, you already have your max of 5 favorites saved. Please upgrade your account to premium to add more than 5 favorites");
             }
         });
         
