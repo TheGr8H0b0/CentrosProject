@@ -11,7 +11,13 @@ $(document).ready(function(){
   // set up callbacks
   jqxhr.done(function(data){
       $("#fav-results").html(data);
-      updateNumFavorites(); // CHECK IF I SHOULD BE HERE <<<<<<<<<<<<<
+      if(String(data).includes("Sorry, you are not logged in")) {
+        // set css
+        $("#fav-results").css("text-align", "center");
+        $("#fav-results").css("font-size", "2rem");
+        $("#fav-results").css("color", "crimson");
+      }
+      updateNumFavorites();
       $(".unstar").on("click", function() {
         var title = $(this).parent().find(".item-title").text();
         console.log(title);
@@ -27,7 +33,7 @@ $(document).ready(function(){
           $(this).html(data);
           if(String(data).includes("Successfully")) {
               window.location.replace("favorites.html");
-              updateNumFavorites(); // CHECK IF I SHOULD BE HERE <<<<<<<<<<<
+              updateNumFavorites();
           } 
         });
       
