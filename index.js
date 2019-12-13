@@ -48,7 +48,7 @@ $(document).ready(function() {
 
 // I STILL NEED TO CALL THIS FUNCTION IF THE USER IS LOGGED IN!!!!
 function showFavorites() {
-    var url = "index.php";
+    var url = "index-populate.php";
         
     var jqxhr = $.post(url);
     
