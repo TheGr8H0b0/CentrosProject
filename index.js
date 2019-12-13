@@ -39,8 +39,8 @@ function sleep(ms) {
     $(item).children().addClass("rotate"); 
 
     await sleep(1100);
-    $(item).parent().parent().addClass("hello");
-    $(item).parent().parent().css("visibility", "hidden");
+    $(item).parent().parent().parent().addClass("hello");
+    $(item).parent().parent().parent().css("visibility", "hidden");
     
     }
 
