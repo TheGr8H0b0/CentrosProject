@@ -18,7 +18,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
 
         // Check connection
         if ($conn->connect_errno) {
-            $statusMessage = "Could not connect to database";
+            console.log("Could not connect to database");
         }
         else {
             // Get the information for the relevant accounts
