@@ -45,15 +45,6 @@ $(document).ready(function() {
                 $("#response").html(data);
             }
         });
-        
-        jqxhr.fail(function(jqXHR){
-            console.log("Error: " + jqXHR.status);
-        });
-        
-        jqxhr.always(function(){
-            console.log("Done with AJAX request.");
-        });
-
     });
     
     function getCookie(name) {
@@ -94,14 +85,11 @@ $(document).ready(function() {
 function checkPasswordMatch() {
     var password = $("#password").val();
     var confirmPassword = $("#c-password").val();
-    console.log("run");
     if (password != confirmPassword || password.length < 8 || confirmPassword.length < 8) {
         $(".password-input").css("background","#e35f5f");
-        console.log("RED");
     }
     else{ //restart animation
         $(".password-input").css("background","#82df8d");
-        console.log("GREEN");
         //$(".password-input").css("background", "linear-gradient(to right, #B294FF, #57E6E6, #FEFFB8, #57E6E6, #B294FF, #57E6E6");
         //$(".password-input").css("animation", "gradient 3s linear infinite");
         //$(".password-input").css("background-size", "500%");

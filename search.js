@@ -252,9 +252,7 @@ function recentSearches() {
 
  async function loadSearchResults() {
     $("#search-results").html("");
-    console.log(displayStyle);
     if (displayStyle == 0) {
-        console.log("None");
         for (var i = 0; i < displayAmount; i++) {
             if (lastSearchData[i] != undefined) {
                 createResultDisplay(lastSearchData[i]);
@@ -322,14 +320,12 @@ function recentSearches() {
             var price = $(this).parent().find(".price").text();
             var itemLink = $(this).parent().find(".item-link").attr("href");
             var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-            console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
         }
 
         var title = $(this).parent().find(".item-title").text();
         var price = $(this).parent().find(".price").text();
         var itemLink = $(this).parent().find(".item-link").attr("href");
         var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-        console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
 
         //Set cookie values for 1 minute to transfer values to addFavorite.php
         var cookieTTLMinutes = "1";
@@ -347,23 +343,12 @@ function recentSearches() {
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
-            console.log(data);
             textItem.text(String(data));
             if(String(data) == "NOT LOGGED IN") {
                 //window.location.replace("login.html");
                 textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
             }
         });
-
-        jqxhr.fail(function(jqXHR){
-            console.log("Error: " + jqXHR.status);
-        });
-
-        jqxhr.always(function(){
-            //Within ajax.always, delete the cookie
-            console.log("Done with AJAX request.");
-        });
-
     });
 }
 function createCookie(name, value, minutes) {
@@ -403,16 +388,59 @@ function isFavorited(item){
       }else{
           isFA = "";
       }
-      console.log("creating item");
-      buildItem(item);
-  });
+      if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
+          if (item.description == null) {
+              var htmlAppend =
+              "<div class='item-container'>" +
+              "<div class='fav-star'><i class='far " + isFA +  "fa-star fav-star-icon'></i></div>" +
+                  "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
+                      "<div class='row'>" +
+                          "<div class='col-xs-3'>" +
+                              "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
+                          "</div>" +
+                          "<div class='col-xs-9'>" +
+                              "<div class='item-title'>" +
+                                  item.title +
+                              "</div>" +
+                              "<div class='price'>" +
+                                  item.price +
+                              "</div>" +
+                              "<div class='item-description'>" +
+                                  "No description was given for this product." +
+                              "</div>" +
+                          "</div>" +
+                      "</div>" +
+                  "</a>" +
+              "</div>";
 
-  jqxhr.fail(function(jqXHR){
-      console.log("Error: " + jqXHR.status);
-  });
+              $("#search-results").append(htmlAppend);
+          } else if (item != undefined) {
+              var htmlAppend =
+              "<div class='item-container'>" +
+                  "<div class='fav-star'><i class='far " + isFA +  " fa-star fav-star-icon'></i></div>" +
+                  "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
+                      "<div class='row'>" +
+                          "<div class='col-xs-3'>" +
+                              "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
+                          "</div>" +
+                          "<div class='col-xs-9'>" +
+                              "<div class='item-title'>" +
+                                  item.title +
+                              "</div>" +
+                              "<div class='price'>" +
+                                  item.price +
+                              "</div>" +
+                              "<div class='item-description'>" +
+                                  item.description +
+                              "</div>" +
+                          "</div>" +
+                      "</div>" +
+                  "</a>" +
+              "</div>";
 
-  jqxhr.always(function(){
-
+              $("#search-results").append(htmlAppend);
+          }
+      }
   });
 }
 function buildItem(item){
