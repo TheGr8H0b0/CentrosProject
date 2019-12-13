@@ -13,9 +13,11 @@ if( isset($_COOKIE['user']) ) { // The User is Logged In
 }
 else { // The User is NOT Logged In
     echo '<h2 class="sub-header">You are not currently logged in.<br>Log in or Sign Up now to upgrade!</h2>
+    <br/>
     <div class="button-container">
         <a href="login.html" class="btn"><span>Log In</span></a>
     </div>
+    <br/>
     <div class="button-container">
         <a href="signup.html" class="btn"><span>Sign Up</span></a>
     </div>';
