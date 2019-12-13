@@ -54,6 +54,7 @@ function showFavorites() {
     
     // set up callbacks
     jqxhr.done(function(data){
+        console.log("LOADING LOGGED IN FAVS");
         $("#favorites-substitute").html(
             '<p class="pop-items"><br>' +
                 'Favorite items...' +
