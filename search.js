@@ -363,6 +363,7 @@ function createResultDisplay(item) {
         if (item.description == null) {
             var htmlAppend =
             "<div class='item-container'>" +
+            "<div class='fav-star'><i class='far fa-star fav-star-icon'></i></div>" +
                 "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
                     "<div class='row'>" + 
                         "<div class='col-xs-3'>" +
