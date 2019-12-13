@@ -54,7 +54,7 @@ function showFavorites() {
     
     // set up callbacks
     jqxhr.done(function(data){
-        $("#favorites").html(data);
+        $("#favorites-substitute").html(data);
     });
 
 }
