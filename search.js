@@ -340,10 +340,12 @@ function loadSearchResults() {
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
             console.log(data);
-            textItem.text(String(data));
+            //textItem.text(String(data));
             if(String(data) == "NOT LOGGED IN") {
-                //window.location.replace("login.html");
                 textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
+            }
+            else if(String(data) == "MAX 5 FILLED") {
+                alert("Sorry, you already have your max of 5 favorites saved.  Please go to your favorites page and unfavorite an item to favorite this item");
             }
         });
         
