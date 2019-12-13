@@ -18,7 +18,7 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
 
         // Check connection
         if ($conn->connect_errno) {
-            $statusMessage = "Could not connect to database";
+            console.log("Could not connect to database");
         }
         else {
             // Get the information for the relevant accounts
@@ -49,7 +49,6 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
                         "</div>" . 
                     "</div>" . 
                 "</a>" .
-                "<div class='unstar' style='cursor: pointer;'>Click to Un-Favorite " . $row["title"] . "</div>" .
             "</div>";            
 
             }
@@ -63,13 +62,13 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
           
     }
     else{
-        $statusMessage = "Sorry, you are not logged in";
+        console.log("Sorry, you are not logged in");
     }
 }
 else{
-    $statusMessage = "No POST request received.";
+    console.log("No POST request received.");
 }
-  
+
 // Echo the result        
 echo($statusMessage);
 
