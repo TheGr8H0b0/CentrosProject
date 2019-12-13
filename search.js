@@ -107,36 +107,47 @@ $(document).ready(function() {
 function filterResults() {
     $("#res-select").removeClass("fade");
     $("#price-select").removeClass("fade");
-    $("#filter-results").html(' Filter Results <br><select id="res-select">' +
-        '<option value="10"' + sel1 + '>10 results</option>' +
-        '<option value="20"' + sel2 + '>20 results</option>' +
-        '<option value="30"' + sel3 + '>30 results</option>' +
-        '<option value="40"' + sel4 + '>40 results</option>' +
-        '<option value="50"' + sel5 + '>50 results</option>' +
-        '<option value="60"' + sel6 + '>60 results</option>' +
-        '<option value="70"' + sel7 + '>70 results</option>' +
-        '<option value="80"' + sel8 + '>80 results</option>' +
-        '<option value="90"' + sel9 + '>90 results</option>' +
-        '<option value="100"' + sel10 + '>100 results</option>' +
-    '</select>' +
-    '<br><select id="price-select">' + 
-        '<option value="None"' + selNone + '>None</option>' +
-        '<option value="low-high"' + selLow + '>low-high</option>' + 
-        '<option value="high-low"' + selHigh + '>high-low</option>' + 
-    '</select>');
-    $("select").on("change", detectSelectChange);
-    $("#filter-results").css("font-size","2.5rem");
-    $("#res-select").css("font-size","1.5rem");
-    $("#price-select").css("font-size","1.5rem");
-    revertTime = Date.now() + 1550;
+    if ($("#filter-results").html() == ' Filter Results') {
+        $("#filter-results").html(' Filter Results <br><select id="res-select">' +
+            '<option value="10"' + sel1 + '>10 results</option>' +
+            '<option value="20"' + sel2 + '>20 results</option>' +
+            '<option value="30"' + sel3 + '>30 results</option>' +
+            '<option value="40"' + sel4 + '>40 results</option>' +
+            '<option value="50"' + sel5 + '>50 results</option>' +
+            '<option value="60"' + sel6 + '>60 results</option>' +
+            '<option value="70"' + sel7 + '>70 results</option>' +
+            '<option value="80"' + sel8 + '>80 results</option>' +
+            '<option value="90"' + sel9 + '>90 results</option>' +
+            '<option value="100"' + sel10 + '>100 results</option>' +
+        '</select>' +
+        '<br><select id="price-select">' + 
+            '<option value="None"' + selNone + '>None</option>' +
+            '<option value="low-high"' + selLow + '>low-high</option>' + 
+            '<option value="high-low"' + selHigh + '>high-low</option>' + 
+        '</select>');
+        $("select").on("change", detectSelectChange);
+        $("#filter-results").css("font-size","2.5rem");
+        $("#res-select").css("font-size","1.5rem");
+        $("#price-select").css("font-size","1.5rem");
+    }
+    revertTime = Date.now() + 2000;
 }
 
-function filterResultsRevert() {
-    var delay = makeDelay(1500);
-    $("#res-select").addClass("fade");
-    $("#price-select").addClass("fade");
-    delay(timeCheck);
-}
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  
+  async function filterResultsRevert(item){
+      console.log(navigator.userAgent.indexOf("Firefox"));
+    await sleep(2000);
+    if (Date.now() > revertTime) {
+        $("#res-select").addClass("fade");
+        $("#price-select").addClass("fade");
+        await sleep(850);
+        $("#filter-results").html(' Filter Results');
+        $("#filter-results").css("font-size","unset");
+    }
+  }
 
 function makeDelay(ms) {
     var timer = 0;
@@ -144,13 +155,6 @@ function makeDelay(ms) {
         clearTimeout(timer);
         timer = setTimeout(callback, ms);
     });
-}
-
-function timeCheck() {
-    if (Date.now() > revertTime) {
-        $("#filter-results").html(' Filter Results');
-        $("#filter-results").css("font-size","unset");
-    }
 }
 
 function detectSelectChange() {
@@ -232,14 +236,14 @@ function revertRecent() {
 }
 
 function recentSearchesRevert() {
-    $("#prev-search").addClass("fade-up");
+    $("#prev-search-container").addClass("fade");
     var delay = makeDelay(800);
     delay(revertRecent);
 }
 
 function recentSearches() {
-    $("#prev-search").removeClass("fade-up");
-    $("#recent-searches").html('<div id="update">Recent Searches</div>' + pastSearches);
+    $("#prev-search-container").removeClass("fade");
+    $("#recent-searches").html('<div id="update">Recent Searches</div><div id="prev-search-container">' + pastSearches + '</div>');
     $("#update").css("font-size","2.5rem");
 }
 
