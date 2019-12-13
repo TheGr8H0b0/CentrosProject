@@ -303,7 +303,7 @@ function recentSearches() {
     console.log("completed");
     // Favorites click Listener code
     $(".fav-star").on("click", function() {
-      console.log("CLICKED STAR");
+      //console.log("CLICKED STAR");
         //Animate star
         if($(this).children().hasClass("fa")){ //remove from favorites
             $(this).children().removeClass("rotate");
@@ -338,7 +338,7 @@ function recentSearches() {
         var url = "addFavorite.php";
 
         var jqxhr = $.post(url);
-        var textItem = $(this);
+        //var textItem = $(this);
 
         // set up callbacks
         jqxhr.done(function(data){
