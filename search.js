@@ -40,9 +40,9 @@ function redirectLoad() {
             localStorage.setItem("1",searchQuery);
             grabRecentSearches();
 
-            $.ajax({  
+            $.ajax({
                 type: 'GET',
-                url: 'search.php', 
+                url: 'search.php',
                 data: { query: searchQuery, numResults: 100 },
                 success: function(response) {
                     var jsonresult = response.split('}}]}');
@@ -66,7 +66,7 @@ $(document).ready(function() {
     $(".search-bar").focus(); //so they can immediately start searching
     $("input").css("transition", "transform 0.9s, opacity .25s;");
         $("input").css("transform", "scale(1.0025,1)");
-    
+
     $(".search-bar").on('keyup', function(event){
         //If the enter button is the button being pressed
         if(event.keyCode ==13){
@@ -79,9 +79,9 @@ $(document).ready(function() {
             localStorage.setItem("1",searchQuery);
             grabRecentSearches();
 
-            $.ajax({  
+            $.ajax({
                 type: 'GET',
-                url: 'search.php', 
+                url: 'search.php',
                 data: { query: searchQuery, numResults: 100 },
                 success: function(response) {
                     var jsonresult = response.split('}}]}');
@@ -96,7 +96,7 @@ $(document).ready(function() {
     $("input").focus(function(){
         $("input").css("transition", "transform .9s, opacity .25s;");
         $("input").css("transform", "scale(1.0025,1)");
-        
+
     });
     $("input").blur(function(){
         $("input").css("transition", "transform .5s, opacity .25s");
@@ -105,38 +105,45 @@ $(document).ready(function() {
 });
 
 function filterResults() {
-    $("#res-select").removeClass("fade");
-    $("#price-select").removeClass("fade");
-    if ($("#filter-results").html() == ' Filter Results') {
-        $("#filter-results").html(' Filter Results <br><select id="res-select">' +
-            '<option value="10"' + sel1 + '>10 results</option>' +
-            '<option value="20"' + sel2 + '>20 results</option>' +
-            '<option value="30"' + sel3 + '>30 results</option>' +
-            '<option value="40"' + sel4 + '>40 results</option>' +
-            '<option value="50"' + sel5 + '>50 results</option>' +
-            '<option value="60"' + sel6 + '>60 results</option>' +
-            '<option value="70"' + sel7 + '>70 results</option>' +
-            '<option value="80"' + sel8 + '>80 results</option>' +
-            '<option value="90"' + sel9 + '>90 results</option>' +
-            '<option value="100"' + sel10 + '>100 results</option>' +
-        '</select>' +
-        '<br><select id="price-select">' + 
-            '<option value="None"' + selNone + '>None</option>' +
-            '<option value="low-high"' + selLow + '>low-high</option>' + 
-            '<option value="high-low"' + selHigh + '>high-low</option>' + 
-        '</select>');
-        $("select").on("change", detectSelectChange);
-        $("#filter-results").css("font-size","2.5rem");
-        $("#res-select").css("font-size","1.5rem");
-        $("#price-select").css("font-size","1.5rem");
-    }
-    revertTime = Date.now() + 800;
+    $("#filter-results").html(' Filter Results <br><select id="res-select">' +
+        '<option value="10"' + sel1 + '>10 results</option>' +
+        '<option value="20"' + sel2 + '>20 results</option>' +
+        '<option value="30"' + sel3 + '>30 results</option>' +
+        '<option value="40"' + sel4 + '>40 results</option>' +
+        '<option value="50"' + sel5 + '>50 results</option>' +
+        '<option value="60"' + sel6 + '>60 results</option>' +
+        '<option value="70"' + sel7 + '>70 results</option>' +
+        '<option value="80"' + sel8 + '>80 results</option>' +
+        '<option value="90"' + sel9 + '>90 results</option>' +
+        '<option value="100"' + sel10 + '>100 results</option>' +
+    '</select>' +
+    '<br><select id="price-select">' +
+        '<option value="None"' + selNone + '>None</option>' +
+        '<option value="low-high"' + selLow + '>low-high</option>' +
+        '<option value="high-low"' + selHigh + '>high-low</option>' +
+    '</select>');
+    $("select").on("change", detectSelectChange);
+    $("#filter-results").css("font-size","2.5rem");
+    $("#res-select").css("font-size","1.5rem");
+    $("#price-select").css("font-size","1.5rem");
+   /* $("#res-select").animate([
+        // keyframes
+        { transform: 'scale(0.5,0.5)' },
+        { color: '#431236', offset: 0.3},
+        { transform: 'scale(1.1,1.1)' }
+      ], {
+        // timing options
+        duration: 1000,
+        iterations: Infinity
+      });
+      */
+    revertTime = Date.now() + 2400;
 }
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  
+
 async function filterResultsRevert(item){
     if (navigator.userAgent.indexOf("Firefox") >= 0) {
         await sleep(2000);
@@ -273,7 +280,7 @@ function loadSearchResults() {
                 var itemToLoad = 0;
                 var minAmount = 999999999999;
                 for (var j = 0; j < 100; j++) {
-                    if (lastSearchData[j] != undefined && 
+                    if (lastSearchData[j] != undefined &&
                         lastSearchData[j].price != undefined) {
                         var num = Number(lastSearchData[j].price.replace(/[^0-9.-]+/g,""));
                         if (minAmount > num && positionsUnused[j]) {
@@ -294,7 +301,7 @@ function loadSearchResults() {
                 var itemToLoad = 0;
                 var maxAmount = 0;
                 for (var j = 0; j < 100; j++) {
-                    if (lastSearchData[j] != undefined && 
+                    if (lastSearchData[j] != undefined &&
                         lastSearchData[j].price != undefined) {
                         var num = Number(lastSearchData[j].price.replace(/[^0-9.-]+/g,""));
                         if (maxAmount < num && positionsUnused[j]) {
@@ -310,11 +317,11 @@ function loadSearchResults() {
     }
     // Favorites click Listener code
     $(".fav-star").on("click", function() {
-        //Animate star 
+        //Animate star
         if($(this).children().hasClass("fa")){ //remove from favorites
-            $(this).children().removeClass("rotate"); 
+            $(this).children().removeClass("rotate");
             $(this).children().removeClass("fa");
-        }  
+        }
         else if ($(this).children().hasClass("login-link")){
             //Do nothing this is when you are not logged in
         }
@@ -332,7 +339,7 @@ function loadSearchResults() {
         var price = $(this).parent().find(".price").text();
         var itemLink = $(this).parent().find(".item-link").attr("href");
         var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-        
+
         //Set cookie values for 1 minute to transfer values to addFavorite.php
         var cookieTTLMinutes = "1";
         createCookie("title",title,cookieTTLMinutes);
@@ -342,10 +349,10 @@ function loadSearchResults() {
 
         //Make an ajax post to addFavorite.php so it can add this item to the database
         var url = "addFavorite.php";
-        
+
         var jqxhr = $.post(url);
         var textItem = $(this);
-        
+
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
@@ -357,40 +364,72 @@ function loadSearchResults() {
                 alert("Sorry, you already have your max of 5 favorites saved. Please upgrade your account to premium to add more than 5 favorites");
             }
         });
-        
+
         jqxhr.fail(function(jqXHR){
             console.log("Error: " + jqXHR.status);
         });
+
+        jqxhr.always(function(){
+            //Within ajax.always, delete the cookie
+            console.log("Done with AJAX request.");
+        });
+
     });
 }
-function createCookie(name, value, minutes) { 
-    var expires; 
-      
-    if (minutes) { 
-        var date = new Date(); 
-        date.setTime(date.getTime() + (minutes * 60 * 1000)); 
-        expires = "; expires=" + date.toGMTString(); 
-    } 
-    else { 
-        expires = ""; 
-    } 
-      
-    document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/"; 
+function createCookie(name, value, minutes) {
+    var expires;
+
+    if (minutes) {
+        var date = new Date();
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+        expires = "; expires=" + date.toGMTString();
+    }
+    else {
+        expires = "";
+    }
+
+    document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
 }
 function createResultDisplay(item) {
-    //Check if item.link == ANY FAVORITED ITEM LINK in database for current user
-    //If it is:
+
+    //Create a cookie with the item link so we can access it from the PHP page
+    var cookieTTLMinutes = "1";
+    createCookie("itemLink",item.link,cookieTTLMinutes);
+    console.log("created isFavorite cookie");
+
+    //Assuming our user is logged in, we call the PHP page
+    //if user isn't logged in, functionality shouldn't work
+    var url = "isFavorite.php";
+    var jqxhr = $.post(url);
+
+    //Run through our AJAX request to get the result of 'if user has favorited this item'
     var isFA = ""
-    if (true) {
-        isFA = "fa";
-    } 
+    console.log("starting isFavorite AJAX request");
+
+    // set up callbacks
+    jqxhr.done(function(data){
+        //Use the response to the ajax post to give feedback
+        console.log("AJAX isFavorite result: "+data);
+        if(String(data) == "TRUE") {
+            isFA = "fa"
+        }
+    });
+    jqxhr.fail(function(jqXHR){
+        console.log("Error: " + jqXHR.status);
+    });
+    jqxhr.always(function(){
+        //Within ajax.always, delete the cookie
+        console.log("Done with AJAX isFavorite request.");
+    });
+    console.log("Creating item");
+
     if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
         if (item.description == null) {
             var htmlAppend =
             "<div class='item-container'>" +
             "<div class='fav-star'><i class='far " + isFA +  " fa-star fav-star-icon'></i></div>" +
                 "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
-                    "<div class='row'>" + 
+                    "<div class='row'>" +
                         "<div class='col-xs-3'>" +
                             "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
                         "</div>" +
@@ -399,13 +438,13 @@ function createResultDisplay(item) {
                                 item.title +
                             "</div>" +
                             "<div class='price'>" +
-                                item.price + 
+                                item.price +
                             "</div>" +
                             "<div class='item-description'>" +
                                 "No description was given for this product." +
                             "</div>" +
-                        "</div>" + 
-                    "</div>" + 
+                        "</div>" +
+                    "</div>" +
                 "</a>" +
             "</div>";
 
@@ -415,7 +454,7 @@ function createResultDisplay(item) {
             "<div class='item-container'>" +
                 "<div class='fav-star'><i class='far " + isFA +  " fa-star fav-star-icon'></i></div>" +
                 "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
-                    "<div class='row'>" + 
+                    "<div class='row'>" +
                         "<div class='col-xs-3'>" +
                             "<img src=" + item.thumbnail + " alt=" + item.description + ">" +
                         "</div>" +
@@ -424,13 +463,13 @@ function createResultDisplay(item) {
                                 item.title +
                             "</div>" +
                             "<div class='price'>" +
-                                item.price + 
+                                item.price +
                             "</div>" +
                             "<div class='item-description'>" +
                                 item.description +
                             "</div>" +
-                        "</div>" + 
-                    "</div>" + 
+                        "</div>" +
+                    "</div>" +
                 "</a>" +
             "</div>";
 
