@@ -373,11 +373,17 @@ function createCookie(name, value, minutes) {
     document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/"; 
 }
 function createResultDisplay(item) {
+    //Check if item.link == ANY FAVORITED ITEM LINK in database for current user
+    //If it is:
+    var isFA = ""
+    if (true) {
+        isFA = "fa";
+    } 
     if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
         if (item.description == null) {
             var htmlAppend =
             "<div class='item-container'>" +
-            "<div class='fav-star'><i class='far fa-star fav-star-icon'></i></div>" +
+            "<div class='fav-star'><i class='far " + isFA +  " fa-star fav-star-icon'></i></div>" +
                 "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
                     "<div class='row'>" + 
                         "<div class='col-xs-3'>" +
@@ -402,7 +408,7 @@ function createResultDisplay(item) {
         } else if (item != undefined) {
             var htmlAppend =
             "<div class='item-container'>" +
-                "<div class='fav-star'><i class='far fa-star fav-star-icon'></i></div>" +
+                "<div class='fav-star'><i class='far " + isFA +  " fa-star fav-star-icon'></i></div>" +
                 "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
                     "<div class='row'>" + 
                         "<div class='col-xs-3'>" +

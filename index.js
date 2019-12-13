@@ -21,4 +21,26 @@ $(document).ready(function() {
         $("input").css("transition", "transform .5s, opacity .25s");
         $("input").css("transform", "scale(.993,.94)");
     });
+
+    //star animation
+  $(".fav-star").on("click", function() {
+    removeFavorite(this);
+  });
 });
+
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async function removeFavorite(item){
+
+    $(item).children().removeClass("fa");
+    $(item).children().addClass("rotate"); 
+
+    await sleep(1100);
+    $(item).parent().parent().addClass("hello");
+    $(item).parent().parent().css("visibility", "hidden");
+    
+    }
+
