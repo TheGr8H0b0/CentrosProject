@@ -35,22 +35,22 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
             while($row = $res->fetch_assoc()){
                 $favs .=
                 "<div class='item'>" .
-                    "<a class='item-link' target='_blank' href=" . $row["itemLink"] . ">" .
-                        "<div class='row'>" . 
+                    "<div class='row'>" . 
+                        "<div class='unstar'><i class='far fa fa-star fav-star-icon'></i></div>" .
+                        "<a class='item-link' target='_blank' href=" . $row["itemLink"] . ">" . 
                             "<div class='col-xs-3'>" .
                                 "<img src='" . $row["imageLink"] . "' alt=" . $row["title"] . ">" .
                             "</div>" .
                             "<div class='col-xs-9'>" .
-                            "<div class='item-title'>" .
-                                $row["title"] .
-                            "</div>" .
-                            "<div class='price'>" .
-                                $row["price"] . 
-                            "</div>" .
-                        "</div>" . 
+                                "<div class='item-title'>" .
+                                    $row["title"] .
+                                "</div>" .
+                                "<div class='price'>" .
+                                    $row["price"] . 
+                                "</div>" .
+                            "</div>" . 
+                        "</a>" .
                     "</div>" . 
-                "</a>" .
-                "<div class='unstar' style='cursor: pointer;'>Click to Un-Favorite " . $row["title"] . "</div>" .
             "</div>";            
 
             }

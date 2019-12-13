@@ -19,6 +19,8 @@ $(document).ready(function(){
       }
       updateNumFavorites();
       $(".unstar").on("click", function() {
+        removeFavorite(this);
+
         var title = $(this).parent().find(".item-title").text();
         console.log(title);
 
@@ -31,8 +33,7 @@ $(document).ready(function(){
         // set up callbacks
         jqxhr.done(function(data){
           $(this).html(data);
-          if(String(data).includes("Successfully")) {
-              window.location.replace("favorites.html");
+          if(String(data).includes("Successfully")) {;
               updateNumFavorites();
           } 
         });
@@ -97,8 +98,7 @@ async function removeFavorite(item){
   $(item).children().addClass("rotate"); 
 
   await sleep(1100);
-  $(item).parent().parent().addClass("hello");
-  $(item).parent().parent().css("visibility", "hidden");
+  $(item).parent().parent().css("display", "none");
   
 }
 
