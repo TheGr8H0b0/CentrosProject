@@ -6,8 +6,14 @@ $(document).ready(function() {
         
         var url = "signup.php";
 
+        var email = $("#signup-email").val();
         var pass = $("#password");
         var confirm = $("#c-password");
+
+        if(!validateEmail(email)) {
+            $("#response").html("Sorry, you must input a valid email");
+            return;
+        }
 
         if(pass.val() !== confirm.val()) {
             $("#response").html("Passwords must match");
@@ -81,6 +87,11 @@ $(document).ready(function() {
     verifyLogin();
 
 });
+
+function validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+}
 
 function checkPasswordMatch() {
     var password = $("#password").val();
