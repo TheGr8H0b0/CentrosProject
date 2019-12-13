@@ -292,6 +292,9 @@ function loadSearchResults() {
             $(this).children().removeClass("rotate"); 
             $(this).children().removeClass("fa");
         }  
+        else if ($(this).children().hasClass("login-link")){
+            //Do nothing this is when you are not logged in
+        }
         else{ //fill in star and add to favorites
             $(this).children().addClass("fa");
             $(this).children().addClass("rotate");
@@ -329,7 +332,7 @@ function loadSearchResults() {
             textItem.text(String(data));
             if(String(data) == "NOT LOGGED IN") {
                 //window.location.replace("login.html");
-                textItem.html("<a href='login.html'>LOGIN WITH ME</a>");
+                textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
             }
         });
         
