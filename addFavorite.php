@@ -48,8 +48,8 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
             
             // Array to hold account information
             $res = $stmt->get_result(); 
-            if($res->num_rows >= 5 && $userType == "standard"){
-                $statusMessage = "MAX 5 FILLED";
+            if($res->num_rows >= 5 && $userType == "standard"){ // The email is already in the database
+                $statusMessage = "Sorry, you already have your max of 5 favorites saved";
             }
             else{ // They're able to add this favorite, so we will add the favorite
                 // Get the information for the relevant accounts

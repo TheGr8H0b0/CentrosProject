@@ -17,6 +17,11 @@ var selNone = 'selected="selected"';
 var pastSearches = "";
 var revertTime = Date.now() + 2400;
 
+var resolve;
+var promise = new Promise(res => {
+  resolve = res;
+});
+
 function grabRecentSearches() {
     pastSearches = "";
     for (var i = 1;i <= 5; i++) {
@@ -140,29 +145,9 @@ function filterResults() {
     revertTime = Date.now() + 2400;
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-async function filterResultsRevert(item){
-    if (navigator.userAgent.indexOf("Firefox") >= 0) {
-        await sleep(2000);
-        if (Date.now() > revertTime) {
-            $("#res-select").addClass("fade");
-            $("#price-select").addClass("fade");
-            await sleep(850);
-            $("#filter-results").html(' Filter Results');
-            $("#filter-results").css("font-size","unset");
-        }
-    } else {
-        $("#res-select").addClass("fade");
-        $("#price-select").addClass("fade");
-        await sleep(800);
-        if (Date.now() > revertTime) {
-            $("#filter-results").html(' Filter Results');
-            $("#filter-results").css("font-size","unset");
-        }
-    }
+function filterResultsRevert() {
+    var delay = makeDelay(2500);
+    delay(timeCheck);
 }
 
 function makeDelay(ms) {
@@ -171,6 +156,13 @@ function makeDelay(ms) {
         clearTimeout(timer);
         timer = setTimeout(callback, ms);
     });
+}
+
+function timeCheck() {
+    if (Date.now() > revertTime) {
+        $("#filter-results").html(' Filter Results');
+        $("#filter-results").css("font-size","unset");
+    }
 }
 
 function detectSelectChange() {
@@ -244,33 +236,28 @@ function detectSelectChange() {
             displayStyle = 0;
             break;
     }
-    if (lastSearchData != undefined) {
-        loadSearchResults();
-    }
-}
-
-function revertRecent() {
-    $("#recent-searches").text("Recent Searches");
+    loadSearchResults();
 }
 
 function recentSearchesRevert() {
-    $("#prev-search-container").addClass("fade");
-    var delay = makeDelay(800);
-    delay(revertRecent);
+    $("#recent-searches").text("Recent Searches");
 }
 
 function recentSearches() {
-    $("#prev-search-container").removeClass("fade");
-    $("#recent-searches").html('<div id="update">Recent Searches</div><div id="prev-search-container">' + pastSearches + '</div>');
+    $("#recent-searches").html('<div id="update">Recent Searches</div>' +
+        '<div id="prev-search">' + pastSearches + '</div>');
     $("#update").css("font-size","2.5rem");
 }
 
-function loadSearchResults() {
+async function loadSearchResults() {
     $("#search-results").html("");
+    console.log(displayStyle);
     if (displayStyle == 0) {
+        console.log("None");
         for (var i = 0; i < displayAmount; i++) {
             if (lastSearchData[i] != undefined) {
                 createResultDisplay(lastSearchData[i]);
+                await promise;
             }
         }
     } else if (displayStyle == 1) {
@@ -291,6 +278,7 @@ function loadSearchResults() {
                 }
                 positionsUnused[itemToLoad] = false;
                 createResultDisplay(lastSearchData[itemToLoad]);
+                await promise;
             }
         }
     } else if (displayStyle == 2) {
@@ -312,6 +300,7 @@ function loadSearchResults() {
                 }
                 positionsUnused[itemToLoad] = false;
                 createResultDisplay(lastSearchData[itemToLoad]);
+                await promise;
             }
         }
     }
@@ -333,12 +322,14 @@ function loadSearchResults() {
             var price = $(this).parent().find(".price").text();
             var itemLink = $(this).parent().find(".item-link").attr("href");
             var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
+            console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
         }
 
         var title = $(this).parent().find(".item-title").text();
         var price = $(this).parent().find(".price").text();
         var itemLink = $(this).parent().find(".item-link").attr("href");
         var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
+        console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
 
         //Set cookie values for 1 minute to transfer values to addFavorite.php
         var cookieTTLMinutes = "1";
@@ -356,12 +347,11 @@ function loadSearchResults() {
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
-            //textItem.text(String(data));
+            console.log(data);
+            textItem.text(String(data));
             if(String(data) == "NOT LOGGED IN") {
+                //window.location.replace("login.html");
                 textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
-            }
-            else if(String(data) == "MAX 5 FILLED") {
-                alert("Sorry, you already have your max of 5 favorites saved. Please upgrade your account to premium to add more than 5 favorites");
             }
         });
 
@@ -390,44 +380,55 @@ function createCookie(name, value, minutes) {
 
     document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
 }
-function createResultDisplay(item) {
 
-    //Create a cookie with the item link so we can access it from the PHP page
-    var cookieTTLMinutes = "1";
-    createCookie("itemLink",item.link,cookieTTLMinutes);
-    console.log("created isFavorite cookie");
+function isFavorited(item){
 
-    //Assuming our user is logged in, we call the PHP page
-    //if user isn't logged in, functionality shouldn't work
-    var url = "isFavorite.php";
-    var jqxhr = $.post(url);
+  //Create a cookie with the item link so we can access it from the PHP page
+  var cookieTTLMinutes = "1";
+  createCookie("itemLink", item.title, cookieTTLMinutes);
+  console.log("created isFavorite cookie");
 
-    //Run through our AJAX request to get the result of 'if user has favorited this item'
-    var isFA = ""
-    console.log("starting isFavorite AJAX request");
+  //Assuming our user is logged in, we call the PHP page
+  //if user isn't logged in, functionality shouldn't work
+  var url = "isFavorite.php";
+  var jqxhr = $.post(url);
 
-    // set up callbacks
-    jqxhr.done(function(data){
-        //Use the response to the ajax post to give feedback
-        console.log("AJAX isFavorite result: "+data);
-        if(String(data) == "TRUE") {
-            isFA = "fa"
-        }
-    });
-    jqxhr.fail(function(jqXHR){
-        console.log("Error: " + jqXHR.status);
-    });
-    jqxhr.always(function(){
-        //Within ajax.always, delete the cookie
-        console.log("Done with AJAX isFavorite request.");
-    });
-    console.log("Creating item");
+  //Run through our AJAX request to get the result of 'if user has favorited this item'
+  var isFA = ""
+  console.log("starting isFavorite AJAX request");
+
+  // set up callbacks
+  jqxhr.done(function(data){
+      //Use the response to the ajax post to give feedback
+      console.log("AJAX isFavorite result: "+data);
+      if(String(data) == "TRUE") {
+          isFA = "fa ";
+      }
+  });
+
+  jqxhr.fail(function(jqXHR){
+      console.log("Error: " + jqXHR.status);
+  });
+
+  jqxhr.always(function(){
+      console.log("Done with AJAX isFavorite request.");
+      return new Promise(function(resolve, reject) {
+        resolve(isFA);
+      });
+  });
+}
+
+async function createResultDisplay(item) {
+
+    console.log("getting isFavorited information");
+    isFA = await isFavorited(item);
+    console.log("creating item, isFA = "+isFA);
 
     if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
         if (item.description == null) {
             var htmlAppend =
             "<div class='item-container'>" +
-            "<div class='fav-star'><i class='far " + isFA +  " fa-star fav-star-icon'></i></div>" +
+            "<div class='fav-star'><i class='far " + isFA +  "fa-star fav-star-icon'></i></div>" +
                 "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
                     "<div class='row'>" +
                         "<div class='col-xs-3'>" +
@@ -476,4 +477,5 @@ function createResultDisplay(item) {
             $("#search-results").append(htmlAppend);
         }
     }
+    resolve();
 }
