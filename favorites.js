@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  var box = document.getElementById("item");
-  var overlay = document.getElementById("overlay");
-  var descOverlay = document.getElementById("descOverlay");
+  //var box = document.getElementById("item");
+  //var overlay = document.getElementById("overlay");
+  //var descOverlay = document.getElementById("descOverlay");
 
   var url = "favorites.php";
       
@@ -11,6 +11,7 @@ $(document).ready(function(){
   // set up callbacks
   jqxhr.done(function(data){
       $("#fav-results").html(data);
+      updateNumFavorites(); // CHECK IF I SHOULD BE HERE <<<<<<<<<<<<<
       $(".unstar").on("click", function() {
         var title = $(this).parent().find(".item-title").text();
         console.log(title);
@@ -26,6 +27,7 @@ $(document).ready(function(){
           $(this).html(data);
           if(String(data).includes("Successfully")) {
               window.location.replace("favorites.html");
+              updateNumFavorites(); // CHECK IF I SHOULD BE HERE <<<<<<<<<<<
           } 
         });
       
@@ -54,6 +56,31 @@ $(document).ready(function(){
   });
 
 });
+
+//Function to update the number of favorites user has in the top right corner
+function updateNumFavorites() {
+  var url = "favorites-num.php";
+
+  // serialize packages the input values in the form
+  var jqxhr = $.post(url);
+
+  // set up callbacks
+  jqxhr.done(function(data){
+    if(String(data).includes("5")) {
+        $("#num-favs").html(String(data));
+    } 
+  });
+
+  jqxhr.fail(function(jqXHR){
+      console.log("Error: " + jqXHR.status);
+  });
+
+  jqxhr.always(function(){
+      console.log("Done with AJAX request.");
+  });
+
+}
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
