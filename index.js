@@ -54,7 +54,11 @@ function showFavorites() {
     
     // set up callbacks
     jqxhr.done(function(data){
-        $("#favorites-substitute").html(data);
+        $("#favorites-substitute").html(
+            '<p class="pop-items"><br>' +
+                'Favorite items...' +
+            '</p>' +
+            data);
     });
 
 }
