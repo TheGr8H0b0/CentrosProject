@@ -19,12 +19,44 @@ body {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-image: radial-gradient(circle at 0% 0%, #373b52, #252736 51%, #1d1e26);
   }
-  
+
+  @keyframes slide-down {
+    0% {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+}
+
+.fade {
+    animation: slide-up 0.8s ease;
+}
+
+select {
+    animation: slide-down 0.8s ease;
+}
+
 #prev-search {
     color: #8bf7f1;
     font-size: 1.5rem;
     margin: auto;
+    animation: slide-down 0.8s ease;
 }
+
 select {
     position: relative;
     display: inline-block;
