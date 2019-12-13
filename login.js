@@ -30,15 +30,6 @@ $(document).ready(function() {
             }
             
         });
-        
-        jqxhr.fail(function(jqXHR){
-            console.log("Error: " + jqXHR.status);
-        });
-        
-        jqxhr.always(function(){
-            console.log("Done with AJAX request.");
-        });
-
     });
 
     function validateEmail(email) {

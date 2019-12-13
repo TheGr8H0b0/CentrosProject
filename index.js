@@ -45,15 +45,13 @@ $(document).ready(function() {
             var price = $(this).parent().find(".price").text();
             var itemLink = $(this).parent().find(".item-link").attr("href");
             var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-            console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
         }
 
         var title = $(this).parent().find(".item-title").text();
         var price = $(this).parent().find(".price").text();
         var itemLink = $(this).parent().find(".item-link").attr("href");
         var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-        console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
-
+        
         //Set cookie values for 1 minute to transfer values to addFavorite.php
         var cookieTTLMinutes = "1";
         createCookie("title",title,cookieTTLMinutes);
@@ -70,7 +68,6 @@ $(document).ready(function() {
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
-            console.log(data);
             //textItem.text(String(data));
             if(String(data) == "NOT LOGGED IN") {
                 textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
@@ -78,15 +75,6 @@ $(document).ready(function() {
             else if(String(data) == "MAX 5 FILLED") {
                 alert("Sorry, you already have your max of 5 favorites saved. Please upgrade your account to premium to add more than 5 favorites");
             }
-        });
-        
-        jqxhr.fail(function(jqXHR){
-            console.log("Error: " + jqXHR.status);
-        });
-        
-        jqxhr.always(function(){
-            //Within ajax.always, delete the cookie
-            console.log("Done with AJAX request.");
         });
     });
 });

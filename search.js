@@ -357,10 +357,6 @@ function loadSearchResults() {
                 alert("Sorry, you already have your max of 5 favorites saved. Please upgrade your account to premium to add more than 5 favorites");
             }
         });
-        
-        jqxhr.fail(function(jqXHR){
-            console.log("Error: " + jqXHR.status);
-        });
     });
 }
 function createCookie(name, value, minutes) { 

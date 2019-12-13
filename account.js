@@ -9,14 +9,6 @@ $(document).ready(function(){
     jqxhr.done(function(data){
         $("#account-info").html(data);
     });
-    
-    jqxhr.fail(function(jqXHR){
-        console.log("Error: " + jqXHR.status);
-    });
-    
-    jqxhr.always(function(){
-        console.log("Done with AJAX request.");
-    });
 
 
     $("#logout-btn").on("click", function(e){
@@ -30,15 +22,6 @@ $(document).ready(function(){
         jqxhr.done(function(data){
             window.location.replace("index.html");
         });
-        
-        jqxhr.fail(function(jqXHR){
-            console.log("Error: " + jqXHR.status);
-        });
-        
-        jqxhr.always(function(){
-            console.log("Done with AJAX request.");
-        });
-
     });
 
 
