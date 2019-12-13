@@ -20,25 +20,23 @@ if( isset($_COOKIE['user']) && isset($_COOKIE['itemLink'])) {
     else {
         // Get the information for our query
         $link = $_COOKIE['itemLink'];
-        $email = $_COOKIE['user'];
+        $email = $_COOKIE['user']
 
         //Get select all favorites with the item link for the item we are creating
-        $stmt = $conn->prepare("SELECT * FROM favorites WHERE user=? AND title=?");
-        $stmt->bind_param("ss", $email, $link);
-
+        $stmt = $conn->prepare("SELECT * FROM favorites WHERE user=? AND itemLink=");
+        $stmt->bind_param("ss", $email, $itemLink);
         $stmt->execute();
 
         // Get the result of our query
         $res = $stmt->get_result();
         $stmt->close();
 
-        //check if we got any results (favorites exist)
-        if($res->num_rows == 0) {
-          echo 'FALSE';
+        //If we have something return from the SQL query, we know that this item is favorited for this user
+        if($res != ""){
+          echo("TRUE");
         }else{
-          echo 'TRUE';
+          echo("FALSE");
         }
-
     }
 }
 else {
