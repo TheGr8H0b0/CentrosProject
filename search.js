@@ -252,9 +252,7 @@ function recentSearches() {
 
 async function loadSearchResults() {
     $("#search-results").html("");
-    console.log(displayStyle);
     if (displayStyle == 0) {
-        console.log("None");
         for (var i = 0; i < displayAmount; i++) {
             if (lastSearchData[i] != undefined) {
                 createResultDisplay(lastSearchData[i]);
@@ -320,15 +318,13 @@ async function loadSearchResults() {
             var price = $(this).parent().find(".price").text();
             var itemLink = $(this).parent().find(".item-link").attr("href");
             var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-            console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
         }
 
         var title = $(this).parent().find(".item-title").text();
         var price = $(this).parent().find(".price").text();
         var itemLink = $(this).parent().find(".item-link").attr("href");
         var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-        console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
-
+        
         //Set cookie values for 1 minute to transfer values to addFavorite.php
         var cookieTTLMinutes = "1";
         createCookie("title",title,cookieTTLMinutes);
@@ -345,7 +341,6 @@ async function loadSearchResults() {
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
-            console.log(data);
             textItem.text(String(data));
             if(String(data) == "NOT LOGGED IN") {
                 //window.location.replace("login.html");
@@ -391,7 +386,6 @@ function isFavorited(item){
       }else{
           isFA = "";
       }
-      console.log("creating item");
       if (item != undefined && item.title != null && item.price != null && item.link && item.thumbnail) {
           if (item.description == null) {
               var htmlAppend =
@@ -445,14 +439,6 @@ function isFavorited(item){
               $("#search-results").append(htmlAppend);
           }
       }
-  });
-
-  jqxhr.fail(function(jqXHR){
-      console.log("Error: " + jqXHR.status);
-  });
-
-  jqxhr.always(function(){
-    
   });
 }
 
