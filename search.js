@@ -298,6 +298,25 @@ function loadSearchResults() {
     }
     // Favorites click Listener code
     $(".fav-star").on("click", function() {
+        //Animate star 
+        if($(this).children().hasClass("fa")){ //remove from favorites
+            $(this).children().removeClass("rotate"); 
+            $(this).children().removeClass("fa");
+        }  
+        else if ($(this).children().hasClass("login-link")){
+            //Do nothing this is when you are not logged in
+        }
+        else{ //fill in star and add to favorites
+            $(this).children().addClass("fa");
+            $(this).children().addClass("rotate");
+             // You'll need to test all of these, some may work, some may not
+            var title = $(this).parent().find(".item-title").text();
+            var price = $(this).parent().find(".price").text();
+            var itemLink = $(this).parent().find(".item-link").attr("href");
+            var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
+            console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
+        }
+
         var title = $(this).parent().find(".item-title").text();
         var price = $(this).parent().find(".price").text();
         var itemLink = $(this).parent().find(".item-link").attr("href");
@@ -322,6 +341,10 @@ function loadSearchResults() {
             //Use the response to the ajax post to give feedback
             console.log(data);
             textItem.text(String(data));
+            if(String(data) == "NOT LOGGED IN") {
+                //window.location.replace("login.html");
+                textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
+            }
         });
         
         jqxhr.fail(function(jqXHR){
@@ -333,22 +356,6 @@ function loadSearchResults() {
             console.log("Done with AJAX request.");
         });
 
-
-        //Animate star 
-        if($(this).children().hasClass("fa")){
-            $(this).children().removeClass("rotate"); 
-            $(this).children().removeClass("fa");
-        }  
-        else{ //file in star and add to favorites
-            $(this).children().addClass("fa");
-            $(this).children().addClass("rotate");
-             // You'll need to test all of these, some may work, some may not
-            var title = $(this).parent().find(".item-title").text();
-            var price = $(this).parent().find(".price").text();
-            var itemLink = $(this).parent().find(".item-link").attr("href");
-            var imgLink = $(this).parent().find(".col-xs-3 img").attr("src");
-            console.log("Title: " + title + " Price: " + price + " Item Link: " + itemLink + " Image Link: " + imgLink);
-        }
     });
 }
 function createCookie(name, value, minutes) { 
@@ -370,6 +377,7 @@ function createResultDisplay(item) {
         if (item.description == null) {
             var htmlAppend =
             "<div class='item-container'>" +
+            "<div class='fav-star'><i class='far fa-star fav-star-icon'></i></div>" +
                 "<a class='item-link' target='_blank' href=" + "https://www.google.com/" + item.link + ">" +
                     "<div class='row'>" + 
                         "<div class='col-xs-3'>" +
@@ -388,7 +396,6 @@ function createResultDisplay(item) {
                         "</div>" + 
                     "</div>" + 
                 "</a>" +
-                "<div class='fav-star'>STAR</div>" +
             "</div>";
 
             $("#search-results").append(htmlAppend);

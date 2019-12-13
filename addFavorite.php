@@ -5,7 +5,7 @@ $statusMessage = "";
   // Since this request will alter the DB, we use POST instead of GET
 if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
     if(!isset($_COOKIE['user'])) {
-        $statusMessage = "Sorry, you are not logged in";
+        $statusMessage = "NOT LOGGED IN";
     }
     // Check the fields are present
     else if(isset($_COOKIE['title']) && isset($_COOKIE['price']) && isset($_COOKIE['itemLink'])) {
