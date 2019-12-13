@@ -338,12 +338,12 @@ function recentSearches() {
         var url = "addFavorite.php";
 
         var jqxhr = $.post(url);
-        //var textItem = $(this);
+        var textItem = $(this);
 
         // set up callbacks
         jqxhr.done(function(data){
             //Use the response to the ajax post to give feedback
-            textItem.text(String(data));
+            //textItem.text(String(data));
             if(String(data) == "NOT LOGGED IN") {
                 //window.location.replace("login.html");
                 textItem.html("<a class='login-link' href='login.html'><button class='login-btn' type='button'>Login in order to favorite!</button></a>");
