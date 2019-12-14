@@ -2,6 +2,12 @@ label,h1,h2,p{
     color: #FFF;
 }
 
+.row{
+    margin-right :auto !important;
+    margin-left: auto !important;
+
+}
+
 
 /*style of the actual input field*/
 .search-bar {
