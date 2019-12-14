@@ -37,7 +37,6 @@ if( $_SERVER['REQUEST_METHOD'] === 'POST' ){
                     "<a class='item-link' target='_blank' href=" . $row["itemLink"] . ">" .
                         "<div class='row'>" . 
                             "<div class='col-xs-3'>" .
-                                "<img src='" . $row["imageLink"] . "' alt=" . $row["title"] . ">" .
                             "</div>" .
                             "<div class='col-xs-9'>" .
                             "<div class='item-title'>" .
